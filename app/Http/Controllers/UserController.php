@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Carousel;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Http\Controllers\Hash;
+use Illuminate\Support\Facades\Hash;
+
 
 
 class UserController extends Controller
@@ -44,6 +45,7 @@ class UserController extends Controller
             'name' => ['required'],
             'email' => ['required',],
             'password' => ['required'],
+            'role' => ['required']
             
         ]);
         
@@ -51,7 +53,8 @@ class UserController extends Controller
         $data = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' =>$request->password,
+            'password' => Hash::make($request->password),
+            'role' =>$request->role
             
         ]);
 
@@ -103,10 +106,11 @@ class UserController extends Controller
 function update(Request $request, $id)
     {
         //Update
-        $data = User::find($id)->first();
+        $data = User::find($id);
 
         $data->name = $request->name;
         $data->email = $request->email;
+        $data->role =$request->role;
        
        
 

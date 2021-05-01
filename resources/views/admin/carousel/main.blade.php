@@ -19,8 +19,8 @@
 <tr>
     <th style="width: 40px;">id</th>
     <th style="width: 40px;">Name</th>
-    <th style="width: 40px;">Price</th>
-    <th style="width: 40px;">Capacity</th>
+    <th style="width: 40px;">Description</th>
+    <th style="width: 40px;">Image</th>
     <th colspan="3">Actions</th>
 </tr>
 @foreach ($data as $post )
@@ -28,10 +28,10 @@
         <td style="width: 40px;">{{$post->id}}</td>
         <td style="width: 40px;">{{$post->name}}</td>
        
-        <td style="width: 40px;">{{$post->price  }}</td>
-        <td style="width: 40px;">{{$post->capacity}}</td>
-        <td style="width: 40px;"><a href="/post/{{$post->id}}/edit"><button class="btn btn-info">Edit</button></a></td>
-        <form method="POST" action="/post/{{$post->id}}">
+        <td style="width: 40px;">{{$post->desc  }}</td>
+        <td style="width: 40px;">{{$post->gallery}}</td>
+        <td style="width: 40px;"><a href="/slider/{{$post->id}}/edit"><button class="btn btn-info">Edit</button></a></td>
+        <form method="POST" action="/slider/{{$post->id}}">
         @csrf
         @method('delete')
         <td><input class="btn btn-warning" type="submit" value="Delete"></td>

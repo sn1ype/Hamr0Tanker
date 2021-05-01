@@ -34,24 +34,24 @@
             <div class="alert alert-danger">Please enter Name</div>
             @enderror
           <label for="exampleInputEmail1">Name</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" name="name">
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" name="name" required>
           
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Description</label>
-          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Description Here" name="desc">
+          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Description Here" name="desc" required>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Price</label>
-            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Enter Tanker Price" name="price">
+            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Enter Tanker Price" name="price" required>
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Capacity</label>
-            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Enter Tanker Capacity" name="capacity">
+            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Enter Tanker Capacity" name="capacity" required>
           </div><br>
           <div class="form-group">
             <label for="exampleInputPassword1">Image</label>
-            <input type="file" class="form-control" id="exampleInputPassword1" placeholder="Enter Tanker Capacity" name="image">
+            <input type="file" class="form-control"   name="image">
           </div><br>
         <button type="submit" class="btn btn-primary">Add Tanker</button>
       </form>

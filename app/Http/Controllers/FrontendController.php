@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Carousel;
+use App\Models\Tanker;
 
 class FrontendController extends Controller
 {
@@ -11,7 +12,8 @@ class FrontendController extends Controller
     {
         //Read
         $carousel=Carousel::all();
+        $products= Tanker::all();
        
-        return view('product',compact('carousel'));
+        return view('product',compact('carousel','products'));
     }
 }

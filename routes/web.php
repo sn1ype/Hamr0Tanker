@@ -14,13 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','FrontendController@index');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::namespace('App\Http\Controllers')->group(function () 
 {
+   
+
     Route::get('/','FrontendController@index');
 
     //Read all the Posts
@@ -56,6 +58,23 @@ Route::namespace('App\Http\Controllers')->group(function ()
  
      //Delete an indicidual post
      Route::delete('/user/{id}','UserController@destroy');
+   
 
+      //Read all the Posts
+      Route::get('/slider','CarouselController@index');
+
+      //Create a new post
+      Route::get('/slider/create','CarouselController@create'); //View
+      Route::post('/slider','CarouselController@store'); //Logical Part
+  
+      //Edit a POST
+      Route::get('/slider/{id}/edit','CarouselController@edit'); //View
+      Route::post('/slider/{id}','CarouselController@update'); //Logical Part
+  
+      //Show individual data
+      Route::get('/slider/{id}','CarouselController@show');
+  
+      //Delete an indicidual post
+      Route::delete('/slider/{id}','CarouselController@destroy');
 });
 

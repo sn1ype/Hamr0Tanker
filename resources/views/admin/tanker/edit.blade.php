@@ -14,7 +14,7 @@
     </div>
 @endif
     <div class="container">
-    <form action="/post/{{$data->id}}" method="POST">
+    <form action="/post/{{$data->id}}" method="POST" enctype='multipart/form-data'>
         @csrf
         @error('title')
         <div class="alert alert-danger">Please enter the title</div>
@@ -24,7 +24,7 @@
         Desc: <input type="text" name="desc" value="{{$data->desc}}"><br>
         Price: <input type="number" name="price" value="{{$data->price}}"><br>
         Capacity: <input type="number" name="capacity" value="{{$data->capacity}}"><br>
-        Image: <input type="file" name="image"><br>
+        Image: <input type="file" class="form-control"  name="image"><br>
         <button class="btn btn-success">Edit Post</button>
     </form>
     </div>

@@ -22,6 +22,7 @@
 
         Name:<input type="text" name="name" value="{{$data->name}}"><br>
         Email: <input type="email" name="email" value="{{$data->email}}"><br>
+        Role: <input type="text" name="role" value="{{$data->role}}"><br>
         <button class="btn btn-success">Edit Post</button>
     </form>
     </div>

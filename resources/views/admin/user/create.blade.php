@@ -44,7 +44,19 @@
         <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter Password" name="password">
+          </div><br>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="role" id="flexRadioDefault1" value="2">
+            <label class="form-check-label" for="flexRadioDefault1">
+              Admin 
+            </label>
           </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="role" id="flexRadioDefault2" value="1" checked>
+            <label class="form-check-label" for="flexRadioDefault2">
+              User
+            </label>
+          </div><br>
           
         <button type="submit" class="btn btn-primary">Create User</button>
       </form>

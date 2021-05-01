@@ -3,13 +3,12 @@
 
 <div class="custom-product">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-          <li data-target="#myCarousel" data-slide-to="1"></li>
-          <li data-target="#myCarousel" data-slide-to="2"></li>
-          <li data-target="#myCarousel" data-slide-to="3"></li>
-        </ol>
+        {{-- <!-- Indicators -->
+        {{-- <ol class="carousel-indicators">
+          @foreach ($carousel as $item)
+          <li data-target="#myCarousel" data-slide-to="{{$item["id"]}}" class="active"></li>
+         @endforeach
+        </ol> --}}
       
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
@@ -36,12 +35,12 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
-      {{-- <div class="trending-wrapper">
+      <div class="trending-wrapper">
           <h3>Available Tankers</h3>
           @foreach ($products as $item)
           <div class="trending-item">
-            <a href="detail/{{$item["id"]}}">
-            <img class="trending-image" src="{{asset('images/'.$item["gallery"])}}">
+            <a style="text-decoration: none;color:black;" href="detail/{{$item["id"]}}">
+            <img class="trending-image" src="{{asset('/images/tanker/'.$item["image"])}}">
        <div class="trending-text">
                <h3>{{$item["name"]}}</h3>
              
@@ -49,7 +48,7 @@
         </a>
     </div>
    @endforeach
-</div> --}}
+</div>
       </div>
 </div>
 @endsection

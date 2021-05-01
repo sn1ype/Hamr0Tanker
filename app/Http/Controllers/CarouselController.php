@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Tanker;
 use App\Models\Carousel;
+use Illuminate\Http\Request;
 
-class TankerController extends Controller
+class CarouselController extends Controller
 {
     public function index()
     {
         //Read
 
-        $data = Tanker::all();
-        $carousel=Carousel::all();
+        $data = Carousel::all();
         // dd($posts);
         // $JSONfile = json_encode($posts);
         // dd($JSONfile);
-        return view('admin.tanker.main',compact('data','carousel'));
+        return view('admin.carousel.main',compact('data'));
     }
 
     /**
@@ -28,7 +26,7 @@ class TankerController extends Controller
     public function create()
     {
         //CREATE
-        return view('admin.tanker.create');
+        return view('admin.carousel.create');
         
     }
 
@@ -45,38 +43,36 @@ class TankerController extends Controller
         $request->validate([
             'name' => 'required',
             'desc' => 'required',
-            'price' => 'required',
-            'capacity' => 'required',
+            'gallery' => 'required',
+            
         ]);
         
-        if ($file = $request->file('image')) {
+        if ($file = $request->file('gallery')) {
             $request->validate([
-                'image' =>'mimes:jpg,jpeg,png,bmp'
+                'gallery' =>'mimes:jpg,jpeg,png,bmp'
             ]);
-            $image = $request->file('image');
+            $image = $request->file('gallery');
             $imgExt = $image->getClientOriginalExtension();
             $fullname = time().".".$imgExt;
-            $result = $image->storeAs('images/tanker',$fullname);
+            $result = $image->storeAs('gallery/carousel',$fullname);
             }
     
             else{
                 $fullname = 'image.png';
             }
 
-            $data = new Tanker();
+            $data = new Carousel();
             $data->name = $request->name;
             $data->desc = $request->desc;
-            $data->price = $request->price;
-            $data->capacity = $request->capacity;
-            $data->image = $fullname;
+            $data->gallery = $fullname;
             $data->save();
 
         if($data->save()){
             //Redirect with Flash message
-            return redirect('/post')->with('status', 'Post added Successfully!');
+            return redirect('/slider')->with('status', 'Carousel added Successfully!');
         }
         else{
-            return redirect('/post/create')->with('status', 'There was an error!');
+            return redirect('/slider/create')->with('status', 'There was an error!');
         }
 
     }
@@ -91,8 +87,8 @@ class TankerController extends Controller
     {
         //Read individual
         // $posts = Post::find(3)->get();
-        $data = Tanker::where('id',$id)->first();
-        return view('admin.tanker.show',compact('data'));
+        $data = Carousel::where('id',$id)->first();
+        return view('admin.carousel.show',compact('data'));
         //
     }
 
@@ -106,8 +102,8 @@ class TankerController extends Controller
     {
         //Update View
         
-        $data = Tanker::where('id',$id)->first();
-        return view('admin.tanker.edit',compact('data'));
+        $data = Carousel::where('id',$id)->first();
+        return view('admin.carousel.edit',compact('data'));
     }
 
     /**
@@ -119,33 +115,31 @@ class TankerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if ($file = $request->file('image')) {
+        if ($file = $request->file('gallery')) {
             $request->validate([
-                'image' =>'mimes:jpg,jpeg,png,bmp'
+                'gallery' =>'mimes:jpg,jpeg,png,bmp'
             ]);
-            $image = $request->file('image');
+            $image = $request->file('gallery');
             $imgExt = $image->getClientOriginalExtension();
             $fullname = time().".".$imgExt;
-            $result = $image->storeAs('images/tanker',$fullname);
+            $result = $image->storeAs('images/carousel',$fullname);
             }
     
             else{
                 $fullname = 'image.png';
             }
-
         //Update
-        $data = Tanker::find($id);
+        $data = Carousel::find($id);
         $data->name = $request->name;
         $data->desc = $request->desc;
-        $data->price = $request->price;
-        $data->capacity = $request->capacity;
-        $data->image=$fullname;
+        $data->gallery = $fullname;
+        
 
         if($data->save()){
-            return redirect('/post')->with('status', 'Post edited Successfully!');
+            return redirect('/slider')->with('status', 'Carousel edited Successfully!');
         }
         else{
-            return redirect('/post/$id/edit')->with('status', 'There was an error');
+            return redirect('/slider/$id/edit')->with('status', 'There was an error');
 
         }
         //
@@ -160,11 +154,11 @@ class TankerController extends Controller
     public function destroy($id)
     {
         //Delete
-        $data = Tanker::find($id);
+        $data = Carousel::find($id);
         if($data->delete()){
-            return redirect('/post')->with('status', 'Post was deleted successfully');
+            return redirect('/slider')->with('status', 'Carousel was deleted successfully');
         }
-        else return redirect('/post')->with('status', 'There was an error');
+        else return redirect('/slider')->with('status', 'There was an error');
 
         
     }

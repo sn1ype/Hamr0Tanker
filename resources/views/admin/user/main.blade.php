@@ -20,6 +20,7 @@
     <th style="width: 40px;">id</th>
     <th style="width: 40px;">Name</th>
     <th style="width: 40px;">Email</th>
+    <th style="width: 40px;">Role</th>
     <th colspan="3">Actions</th>
 </tr>
 @foreach ($data as $post )
@@ -28,6 +29,7 @@
         <td style="width: 40px;">{{$post->name}}</td>
        
         <td style="width: 40px;">{{$post->email  }}</td>
+        <td style="width: 40px;">{{$post->role  }}</td>
 
         <td style="width: 40px;"><a href="/user/{{$post->id}}/edit"><button class="btn btn-info">Edit</button></a></td>
         <form method="POST" action="/user/{{$post->id}}">
