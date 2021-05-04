@@ -16,7 +16,7 @@ class UserController extends Controller
         //Read
 
         $data = User::all();
-        return view('admin.user.main',compact('data'));
+        return view('admin.userstable',compact('data'));
     }
 
     /**
@@ -60,10 +60,10 @@ class UserController extends Controller
 
         if($data){
             //Redirect with Flash message
-            return redirect('/user')->with('status', 'User created Successfully!');
+            return redirect('/userstable')->with('status', 'User created Successfully!');
         }
         else{
-            return redirect('/user/create')->with('status', 'There was an error!');
+            return redirect('/userstable/create')->with('status', 'There was an error!');
         }
 
     }
@@ -115,10 +115,10 @@ function update(Request $request, $id)
        
 
         if($data->save()){
-            return redirect('/user')->with('status', 'User edited Successfully!');
+            return redirect('/userstable')->with('status', 'User edited Successfully!');
         }
         else{
-            return redirect('/user/$id/edit')->with('status', 'There was an error');
+            return redirect('/userstable/$id/edit')->with('status', 'There was an error');
 
         }
         //
@@ -135,9 +135,9 @@ function update(Request $request, $id)
         //Delete
         $data = User::find($id);
         if($data->delete()){
-            return redirect('/user')->with('status', 'User was deleted successfully');
+            return redirect('/userstable')->with('status', 'User was deleted successfully');
         }
-        else return redirect('/user')->with('status', 'There was an error');
+        else return redirect('/userstable')->with('status', 'There was an error');
 
         
     }

@@ -29,11 +29,11 @@
         @if (Route::has('login'))
         @auth
 
-        
+       
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ Auth::user()->name }}
           </button>
+          {{ Auth::user()->name }}
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item">
               <form class="d-grid" action="{{ route('logout') }}" method="POST">

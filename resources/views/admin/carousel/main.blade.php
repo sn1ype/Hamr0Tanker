@@ -43,6 +43,6 @@
 @endforeach
 
 </table>
-<a href="/post/create" class="btn btn-primary" >Add Tanker</a>
+<a href="/slider/create" class="btn btn-primary" >Add Tanker</a>
 </body>
 </html>

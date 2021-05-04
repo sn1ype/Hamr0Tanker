@@ -43,21 +43,21 @@ Route::namespace('App\Http\Controllers')->group(function ()
     Route::delete('/post/{id}','TankerController@destroy');
 
      //Read all the Posts
-     Route::get('/user','UserController@index');
+     Route::get('/userstable','UserController@index');
 
      //Create a new post
-     Route::get('/user/create','UserController@create'); //View
-     Route::post('/user','UserController@store'); //Logical Part
+     Route::get('/userstable/create','UserController@create'); //View
+     Route::post('/userstable','UserController@store'); //Logical Part
  
      //Edit a POST
-     Route::get('/user/{id}/edit','UserController@edit'); //View
-     Route::post('/user/{id}','UserController@update'); //Logical Part
+     Route::get('/userstable/{id}/edit','UserController@edit'); //View
+     Route::post('/userstable/{id}','UserController@update'); //Logical Part
  
      //Show individual data
-     Route::get('/user/{id}','UserController@show');
+     Route::get('/userstable/{id}','UserController@show');
  
      //Delete an indicidual post
-     Route::delete('/user/{id}','UserController@destroy');
+     Route::delete('/userstable/{id}','UserController@destroy');
    
 
       //Read all the Posts
@@ -76,5 +76,12 @@ Route::namespace('App\Http\Controllers')->group(function ()
   
       //Delete an indicidual post
       Route::delete('/slider/{id}','CarouselController@destroy');
+
+
+      Route::get('/admin','FrontendController@dashboard');
+      Route::get('/profile','FrontendController@profile');
+      Route::get('/userstable','FrontendController@usersTable');
+      Route::get('/carousel','FrontendController@carousel');
+      Route::get('/tanker','FrontendController@Tanker');
 });
 

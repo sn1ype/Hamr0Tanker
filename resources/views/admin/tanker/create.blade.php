@@ -14,19 +14,7 @@
     </div>
 @endif
     <div class="container">
-    {{-- <form action="/post" method="POST">
-        @csrf
-
-        @error('title')
-        <div class="alert alert-danger">Please enter the title</div>
-        @enderror
-
-        Name:<input type="text" name="name"><br>
-        Description: <input type="text" name="desc" ><br>
-        Price: <input type="number" name="price" ><br>
-        Capacity: <input type="text" name="capacity" ><br>
-        <button class="btn btn-primary">Add Tanker</button>
-    </form> --}}
+  
     <form action="/post" method="POST" enctype='multipart/form-data'>
         <div class="form-group">
             @csrf
