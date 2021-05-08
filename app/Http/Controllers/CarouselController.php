@@ -44,7 +44,7 @@ class CarouselController extends Controller
             'name' => 'required',
             'desc' => 'required',
             'gallery' => 'required',
-            
+            'image' => 'required'
         ]);
         
         if ($file = $request->file('gallery')) {

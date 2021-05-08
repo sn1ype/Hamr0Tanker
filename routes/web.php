@@ -26,21 +26,21 @@ Route::namespace('App\Http\Controllers')->group(function ()
     Route::get('/','FrontendController@index');
 
     //Read all the Posts
-    Route::get('/post','TankerController@index');
+    Route::get('/tanker','TankerController@index');
 
     //Create a new post
-    Route::get('/post/create','TankerController@create'); //View
-    Route::post('/post','TankerController@store'); //Logical Part
+    Route::get('/tanker/create','TankerController@create'); //View
+    Route::post('/tanker','TankerController@store'); //Logical Part
 
     //Edit a POST
-    Route::get('/post/{id}/edit','TankerController@edit'); //View
-    Route::post('/post/{id}','TankerController@update'); //Logical Part
+    Route::get('/tanker/{id}/edit','TankerController@edit'); //View
+    Route::post('/tanker/{id}','TankerController@update'); //Logical Part
 
     //Show individual data
-    Route::get('/post/{id}','TankerController@show');
+    Route::get('/tanker/{id}','TankerController@show');
 
     //Delete an indicidual post
-    Route::delete('/post/{id}','TankerController@destroy');
+    Route::delete('/tanker/{id}','TankerController@destroy');
 
      //Read all the Posts
      Route::get('/userstable','UserController@index');

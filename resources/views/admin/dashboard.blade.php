@@ -50,7 +50,7 @@
                         <!-- Logo icon -->
                         <b class="logo-icon">
                             <!-- Dark Logo icon -->
-                            <img style="width: 160px; height:90px;" src="{{ URL::asset('images/tanker/logo.png')}}" alt="homepage" />
+                            <img style="width: 100%; height:75px" src="{{ URL::asset('images/tanker/logo.png')}}" alt="HamroTanker" />
                         </b>
                     </a>
                     <!-- ============================================================== -->

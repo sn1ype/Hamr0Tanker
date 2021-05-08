@@ -1,32 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create View</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-</head>
-<body>
-@if (session('status'))
+@extends('admin.dashboard')
+@section('content')
+    
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="white-box">
+
+    @if (session('status'))
     <div class="alert alert-danger">
         {{ session('status') }}
     </div>
 @endif
     <div class="container">
-    <form action="/post/{{$data->id}}" method="POST" enctype='multipart/form-data'>
-        @csrf
-        @error('title')
-        <div class="alert alert-danger">Please enter the title</div>
-        @enderror
-
-        Name:<input type="text" name="name" value="{{$data->name}}"><br>
-        Desc: <input type="text" name="desc" value="{{$data->desc}}"><br>
-        Price: <input type="number" name="price" value="{{$data->price}}"><br>
-        Capacity: <input type="number" name="capacity" value="{{$data->capacity}}"><br>
-        Image: <input type="file" class="form-control"  name="image"><br>
-        <button class="btn btn-success">Edit Post</button>
-    </form>
+  
+    <form action="/tanker/{{$data->id}}" method="POST" enctype='multipart/form-data'>
+        <div class="form-group">
+           
+            @csrf
+          <label for="exampleInputEmail1">Name</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  name="name" value="{{$data->name}}">
+          
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Description</label>
+          <input type="text" class="form-control" id="exampleInputPassword1"  name="desc" value="{{$data->desc}}">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Price</label>
+            <input type="number" class="form-control" id="exampleInputPassword1"  name="price" value="{{$data->price}}">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Capacity</label>
+            <input type="number" class="form-control" id="exampleInputPassword1"  name="capacity" value="{{$data->capacity}}">
+          </div><br>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Previous Image of  {{$data->name}} :<br><span><img style="width: 200px;height:100px" src="{{asset('/images/tanker/'.$data["image"])}}"/></span></label>
+            <input type="file" class="form-control" name="image" required>
+          </div><br>
+        <button type="submit" class="btn btn-success">Update Tanker</button>
+      </form>
+      <div style="margin-top:10px"><a href="/tanker"><button style="width: 116px" class="btn btn-danger">Cancel</button></a></div>
     </div>
-</body>
-</html>
+      
+    </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    @endsection

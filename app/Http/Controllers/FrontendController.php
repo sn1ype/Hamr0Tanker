@@ -15,7 +15,7 @@ class FrontendController extends Controller
         $carousel=Carousel::all();
         $products= Tanker::all();
        
-        return view('product',compact('carousel','products'));
+        return view('tankers',compact('carousel','products'));
     }
     
     public function dashboard()

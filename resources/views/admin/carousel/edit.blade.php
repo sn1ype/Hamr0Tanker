@@ -22,7 +22,7 @@
 
         Name:<input type="text" name="name" value="{{$data->name}}"><br>
         Desc: <input type="text" name="desc" value="{{$data->desc}}"><br>
-        Image: <input type="file" name="gallery" ><br>
+        Image: <input type="file" name="gallery" required><br>
        
         <button class="btn btn-success">Edit Post</button>
     </form>

@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create View</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-</head>
-<body>
+@extends('admin.dashboard')
+@section('content')
+    
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="white-box">
 @if (session('status'))
     <div class="alert alert-danger">
         {{ session('status') }}
@@ -15,7 +13,7 @@
 @endif
     <div class="container">
   
-    <form action="/post" method="POST" enctype='multipart/form-data'>
+    <form action="/tanker" method="POST" enctype='multipart/form-data'>
         <div class="form-group">
             @csrf
             @error('title')
@@ -43,6 +41,12 @@
           </div><br>
         <button type="submit" class="btn btn-primary">Add Tanker</button>
       </form>
+      <div style="margin-top:10px"><a href="/tanker"><button style="width: 100px" class="btn btn-danger">Cancel</button></a></div>
     </div>
-</body>
-</html>
+      
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+    @endsection

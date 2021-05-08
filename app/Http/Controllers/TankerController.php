@@ -17,7 +17,7 @@ class TankerController extends Controller
         // dd($posts);
         // $JSONfile = json_encode($posts);
         // dd($JSONfile);
-        return view('admin.tanker.main',compact('data','carousel'));
+        return view('admin.tanker',compact('data','carousel'));
     }
 
     /**
@@ -47,6 +47,7 @@ class TankerController extends Controller
             'desc' => 'required',
             'price' => 'required',
             'capacity' => 'required',
+            
         ]);
         
         if ($file = $request->file('image')) {
@@ -73,10 +74,10 @@ class TankerController extends Controller
 
         if($data->save()){
             //Redirect with Flash message
-            return redirect('/post')->with('status', 'Post added Successfully!');
+            return redirect('/tanker')->with('status', 'Tanker added Successfully!');
         }
         else{
-            return redirect('/post/create')->with('status', 'There was an error!');
+            return redirect('/tanker/create')->with('status', 'There was an error!');
         }
 
     }
@@ -142,10 +143,10 @@ class TankerController extends Controller
         $data->image=$fullname;
 
         if($data->save()){
-            return redirect('/post')->with('status', 'Post edited Successfully!');
+            return redirect('/tanker')->with('status', 'Tanker edited Successfully!');
         }
         else{
-            return redirect('/post/$id/edit')->with('status', 'There was an error');
+            return redirect('/tanker/$id/edit')->with('status', 'There was an error');
 
         }
         //
@@ -162,9 +163,9 @@ class TankerController extends Controller
         //Delete
         $data = Tanker::find($id);
         if($data->delete()){
-            return redirect('/post')->with('status', 'Post was deleted successfully');
+            return redirect('/tanker')->with('status', 'Post was deleted successfully');
         }
-        else return redirect('/post')->with('status', 'There was an error');
+        else return redirect('/tanker')->with('status', 'There was an error');
 
         
     }

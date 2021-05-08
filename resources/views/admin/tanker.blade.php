@@ -30,8 +30,8 @@
         <td style="width: 40px;text-align:center;">{{$post->capacity}}</td>
         <td style="width: 40px;text-align:center;">{{$post->image}}</td>
         <td style="width: 40px;text-align:center;"></td>
-        <td style="width: 40px;text-align:center;"><a href="/post/{{$post->id}}/edit"><button class="btn btn-info">Edit</button></a></td>
-        <form method="POST" action="/post/{{$post->id}}">
+        <td style="width: 40px;text-align:center;"><a href="/tanker/{{$post->id}}/edit"><button class="btn btn-info">Edit</button></a></td>
+        <form method="POST" action="/tanker/{{$post->id}}">
         @csrf
         @method('delete')
         <td><input class="btn btn-warning" type="submit" value="Delete"></td>
@@ -43,7 +43,7 @@
 @endforeach
 
 </table>
-<a href="/post/create" class="btn btn-primary" >Add Tanker</a>
+<a href="/tanker/create" class="btn btn-primary" >Add Tanker</a>
             </div>
         </div>
     </div>

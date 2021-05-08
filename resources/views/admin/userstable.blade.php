@@ -30,7 +30,7 @@
                                             <td>{{$post->id}}</td>
                                             <td>{{$post->name}}</td>
                                             <td>{{$post->email}}</td>
-                                            <td>{{$post->role}}</td>
+                                            <td><?php if($post['role']=="2") {echo "Admin";} else {echo "User";}?></td>
                                             <td style="width: 40px;"><a href="/userstable/{{$post->id}}/edit"><button class="btn btn-info">Edit</button></a></td>
                                             <form method="POST" action="/userstable/{{$post->id}}">
                                                 @csrf
