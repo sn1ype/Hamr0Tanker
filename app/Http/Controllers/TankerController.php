@@ -74,10 +74,10 @@ class TankerController extends Controller
 
         if($data->save()){
             //Redirect with Flash message
-            return redirect('/tanker')->with('status', 'Tanker added Successfully!');
+            return redirect('/admin/tanker')->with('status', 'Tanker added Successfully!');
         }
         else{
-            return redirect('/tanker/create')->with('status', 'There was an error!');
+            return redirect('/admin/tanker/create')->with('status', 'There was an error!');
         }
 
     }
@@ -120,6 +120,7 @@ class TankerController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $data = Tanker::find($id);
         if ($file = $request->file('image')) {
             $request->validate([
                 'image' =>'mimes:jpg,jpeg,png,bmp'
@@ -131,7 +132,7 @@ class TankerController extends Controller
             }
     
             else{
-                $fullname = 'image.png';
+                $fullname = $data->image;
             }
 
         //Update
@@ -143,10 +144,10 @@ class TankerController extends Controller
         $data->image=$fullname;
 
         if($data->save()){
-            return redirect('/tanker')->with('status', 'Tanker edited Successfully!');
+            return redirect('/admin/tanker')->with('status', 'Tanker updated Successfully!');
         }
         else{
-            return redirect('/tanker/$id/edit')->with('status', 'There was an error');
+            return redirect('/admin/tanker/$id/edit')->with('status', 'There was an error');
 
         }
         //
@@ -163,10 +164,14 @@ class TankerController extends Controller
         //Delete
         $data = Tanker::find($id);
         if($data->delete()){
-            return redirect('/tanker')->with('status', 'Post was deleted successfully');
+            return redirect('/admin/tanker')->with('status', 'Post was deleted successfully');
         }
-        else return redirect('/tanker')->with('status', 'There was an error');
+        else return redirect('/admin/tanker')->with('status', 'There was an error');
 
         
+    }
+    public function ViewProduct($id){
+        $data = Tanker::find($id);
+        return view('viewtanker',compact('data'));
     }
 }

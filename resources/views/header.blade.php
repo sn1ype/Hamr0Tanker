@@ -1,3 +1,7 @@
+<?php
+$user = auth()->user();
+?>
+
 <html>
   <head>
     <style>
@@ -119,83 +123,7 @@
    
   </head>
   <body>
-
-{{-- <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">HamroTanker</a>
-      </div>
-  
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          
-          <li class="active"><a href="/">Home</a></li>
-          <li class="  "><a href="#">Order lIst</a></li>
-        </ul>
-        <form action="/search" class="navbar-form navbar-left">
-          <div class="form-group">
-            <input type="text" name="query" class="form-control search-box" placeholder="eg.tanker" required>
-          </div>
-          <button type="submit" class="btn btn-default">Search</button>
-        </form>
-        @if (Route::has('login'))
-        @auth
-
-       
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          </button>
-          {{ Auth::user()->name }}
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item">
-              <form class="d-grid" action="{{ route('logout') }}" method="POST">
-                @csrf
-                <input type="submit" class="btn btn-light" id="btn-of-blog" value="logout">
-            </form></a>
-          </div>
-        </div> --}}
-       {{-- <li class="nav-item dropdown">
-          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-              {{ Auth::user()->name }}
-          </a>
-
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{{ route('logout') }}"
-                 onclick="event.preventDefault();
-                               document.getElementById('logout-form').submit();">
-                  {{ __('Logout') }}
-              </a>
-
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                  @csrf
-              </form>
-          </div>
-      </li> --}}
-    {{-- @else
-        <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
-
-        @if (Route::has('register'))
-            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
-        @endif
-    @endauth
-</div>
-@endif
-          </li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav> --}}
-
- 
-<nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+<nav style="border-radius: 0px" class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark" style="background-color: #262F4D">
   <a style="font-size:24px" class="navbar-brand" href="/">HamroTanker</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -204,7 +132,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/">
           <i class="fa fa-home"></i>
           Home
           <span class="sr-only">(current)</span>
@@ -219,7 +147,7 @@
         </a>
       </li>
      
-      <li class="nav-item dropdown">
+      {{-- <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-envelope-o">
             <span class="badge badge-primary">11</span>
@@ -232,25 +160,54 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
-      </li>
+      </li> --}}
     </ul>
     <ul class="navbar-nav ">
+      @if(Auth::user())
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" data-target="#navItemGame"  id="navbarDropdown" role="button" data-toggle="dropdown" v-pre>
+          <i class="fa fa-user" style="color:blue">
+            <span class="badge badge-primary"></span>
+          </i><?php
+          print($user->name);
+
+          ?>@if($user['verified']=='2')<img style='width: 15px;height:15px' title="Verified" src='{{asset("/images/badges/admin.png")}}'/>@endif
+        </a>
+        <div id="#navItemGame" class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a id="#navItemGame" class="dropdown-item" href="/myorders">My Orders</a>
+          <a id="#navItemGame" class="dropdown-item" href="/user">Profile</a>
+          <a id="#navItemGame" class="dropdown-item" href="/logout">Logout</a>
+        
+         
+        </div>
+      </li>
+      @else
       <li class="nav-item">
-        <a class="nav-link" href="#">
-          <i class="fa fa-bell">
-            <span class="badge badge-info">11</span>
+        <a class="nav-link" href="/login">
+          <i class="fa fa-user" style="color:green">
+           
           </i>
-          Test
+          Login
         </a>
       </li>
+@endif
+      @if ($user==NULL)
+      <span></span>
+      @else
+@if($user['role']=='2')
       <li class="nav-item">
         <a class="nav-link" href="/admin">
-          <i class="fa fa-user">
-            <span class="badge badge-success">11</span>
+          <i class="fa fa-user" style="color:red">
+            {{-- <span class="badge badge-success">11</span> --}}
           </i>
           Admin
         </a>
       </li>
+      @else
+          <span></span>
+      
+      @endif
+      @endif
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">

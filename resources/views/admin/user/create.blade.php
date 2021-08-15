@@ -9,12 +9,17 @@
         <div class="col-sm-12">
           <div class="white-box">
             @if (session('status'))
-    <div class="alert alert-danger">
+    <div class="alert alert-success">
         {{ session('status') }}
     </div>
 @endif
+@if (session('error'))
+<div class="alert alert-danger">
+    {{ session('error') }}
+</div>
+@endif
 <div class="container">
-      <form action="/userstable" method="POST">
+      <form action="/admin/userstable" method="POST">
         <div class="form-group">
             @csrf
             
@@ -43,10 +48,24 @@
               User
             </label>
           </div><br>
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="verified" id="flexRadioDefault1" value="2">
+            <label class="form-check-label" for="flexRadioDefault1">
+              Verified 
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="verified" id="flexRadioDefault2" value="1" checked>
+            <label class="form-check-label" for="flexRadioDefault2">
+              Not Verified
+            </label>
+          </div><br>
+
           
         <button type="submit" class="btn btn-primary">Create User</button>
       </form>
-      <div style="margin-top:10px"><a href="/userstable"><button style="width: 100px" class="btn btn-danger">Cancel</button></a></div>
+      <div style="margin-top:10px"><a href="/admin/userstable"><button style="width: 100px" class="btn btn-danger">Cancel</button></a></div>
     </div>
           </div>
         </div>

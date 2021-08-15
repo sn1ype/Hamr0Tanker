@@ -21,7 +21,7 @@
     <th style="width: 40px;text-align:center;"></th>
     <th colspan="3">Actions</th>
 </tr>
-@foreach ($tankers as $post )
+@foreach ($data as $post )
     <tr>
         <td style="width: 40px;text-align:center;">{{$post->id}}</td>
         <td style="width: 40px;text-align:center;">{{$post->name}}</td>
@@ -30,11 +30,11 @@
         <td style="width: 40px;text-align:center;">{{$post->capacity}}</td>
         <td style="width: 40px;text-align:center;">{{$post->image}}</td>
         <td style="width: 40px;text-align:center;"></td>
-        <td style="width: 40px;text-align:center;"><a href="/tanker/{{$post->id}}/edit"><button class="btn btn-info">Edit</button></a></td>
-        <form method="POST" action="/tanker/{{$post->id}}">
+        <td style="width: 40px;text-align:center;"><form action="/admin/tanker/{{$post->id}}/edit" method="GET"> <input class="btn btn-success" type="submit" value="Update"></form></td>
+        <form method="POST" action="/admin/tanker/{{$post->id}}">
         @csrf
         @method('delete')
-        <td><input class="btn btn-warning" type="submit" value="Delete"></td>
+        <td><input class="btn btn-danger" type="submit" value="Delete"></td>
         </form>
       
 
@@ -43,7 +43,11 @@
 @endforeach
 
 </table>
-<a href="/tanker/create" class="btn btn-primary" >Add Tanker</a>
+<form method="GET" action="/admin/tanker/create">
+   
+    <input class="btn btn-primary" type="submit" value="Add Tanker">
+    </form>
+
             </div>
         </div>
     </div>

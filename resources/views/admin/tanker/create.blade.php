@@ -13,7 +13,7 @@
 @endif
     <div class="container">
   
-    <form action="/tanker" method="POST" enctype='multipart/form-data'>
+    <form action="/admin/tanker" method="POST" enctype='multipart/form-data'>
         <div class="form-group">
             @csrf
             @error('title')
@@ -41,8 +41,9 @@
           </div><br>
         <button type="submit" class="btn btn-primary">Add Tanker</button>
       </form>
-      <div style="margin-top:10px"><a href="/tanker"><button style="width: 100px" class="btn btn-danger">Cancel</button></a></div>
-    </div>
+      <form action="/admin/tanker">
+      <div style="margin-top:10px"><button type="submit" style="width: 100px" class="btn btn-danger">Cancel</button></a></div>
+    </div></form>
       
     </div>
     </div>

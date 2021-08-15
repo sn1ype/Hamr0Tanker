@@ -1,31 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create View</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-</head>
-<body>
-@if (session('status'))
+
+@extends('admin.dashboard')
+@section('content')
+    
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="white-box">
+        @if (session('status'))
     <div class="alert alert-danger">
         {{ session('status') }}
     </div>
 @endif
-    <div class="container">
-    <form action="/slider/{{$data->id}}" method="POST" enctype='multipart/form-data'>
+        <div class="container">
+  <form action="/admin/carousel/{{$data->id}}" method="POST" enctype='multipart/form-data'>
+    <div class="form-group">
         @csrf
-        @error('title')
-        <div class="alert alert-danger">Please enter the title</div>
-        @enderror
-
-        Name:<input type="text" name="name" value="{{$data->name}}"><br>
-        Desc: <input type="text" name="desc" value="{{$data->desc}}"><br>
-        Image: <input type="file" name="gallery" required><br>
-       
-        <button class="btn btn-success">Edit Post</button>
-    </form>
+        
+      <label for="exampleInputEmail1">Name</label>
+      <input type="text" class="form-control"   placeholder="Carousel Title" name="name" value="{{$data->name}}">
+      
     </div>
-</body>
-</html>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Description</label>
+      <input type="text" class="form-control" placeholder="Enter Desc." name="desc" value="{{$data->desc}}">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Current Image of {{$data->name}} :<br>@if($data['image']=='image.png')  <p> Sorry no image found.</p> @else <span><img style='width: 200px;height:130px' src='{{asset("/images/carousel/".$data["gallery"])}}'/></span>@endif</label>
+      
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Image</label>
+      <input type="file" class="form-control" value="{{asset("/images/carousel/".$data["gallery"])}}"   name="gallery">
+    </div>
+    <br>
+      
+    <button type="submit" class="btn btn-primary">Update Carousel</button>
+  </form>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection

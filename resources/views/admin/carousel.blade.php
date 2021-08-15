@@ -1,10 +1,6 @@
 @extends('admin.dashboard')
 @section('content')
-@if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
-    </div>
-@endif
+
             <div class="container-fluid">
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
@@ -12,6 +8,11 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="white-box">
+                            @if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
                             <h3 class="box-title">Carousel</h3>
                             <div class="table-responsive">
                                 <table class="table text-nowrap">
@@ -25,23 +26,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($carousel as $post )
+                                        @foreach ($data as $post )
                                         <tr>
                                             <td>{{$post->id}}</td>
                                             <td>{{$post->name}}</td>
                                             <td>{{$post->desc}}</td>
                                             <td>{{$post->gallery}}</td>
-                                            <td style="width: 40px;"><a href="/slider/{{$post->id}}/edit"><button class="btn btn-info">Edit</button></a></td>
-                                            <form method="POST" action="/slider/{{$post->id}}">
+                                            <td style="width: 40px;"><a href="/admin/carousel/{{$post->id}}/edit"><button class="btn btn-success">Update</button></a></td>
+                                            <form method="POST" action="/admin/carousel/{{$post->id}}">
                                                 @csrf
                                                 @method('delete')
-                                                <td><input class="btn btn-warning" type="submit" value="Delete"></td>
+                                                <td><input class="btn btn-danger" type="submit" value="Delete"></td>
                                                 </form>
                                         </tr>
                                        @endforeach
                                     </tbody>
                                 </table>
-                                <a href="/slider/create" class="btn btn-primary" >Create Carousel</a>
+                                <form method="GET" action="/admin/carousel/create">
+   
+                                    <input class="btn btn-primary" type="submit" value="Add Carousel">
+                                    </form>
+                               
                             </div>
                         </div>
                     </div>
@@ -72,4 +77,6 @@
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
     </div>
+   
+    
    @endsection

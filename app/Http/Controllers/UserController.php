@@ -45,7 +45,8 @@ class UserController extends Controller
             'name' => ['required'],
             'email' => ['required',],
             'password' => ['required'],
-            'role' => ['required']
+            'role' => ['required'],
+            'verified' => ['required']
             
         ]);
         
@@ -54,16 +55,17 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' =>$request->role
+            'role' =>$request->role,
+            'verified' =>$request->verified
             
         ]);
 
         if($data){
             //Redirect with Flash message
-            return redirect('/userstable')->with('status', 'User created Successfully!');
+            return redirect('/admin/userstable')->with('status', 'User created Successfully!');
         }
         else{
-            return redirect('/userstable/create')->with('status', 'There was an error!');
+            return redirect('/admin/userstable/create')->with('error', 'There was an error!');
         }
 
     }
@@ -111,14 +113,16 @@ function update(Request $request, $id)
         $data->name = $request->name;
         $data->email = $request->email;
         $data->role =$request->role;
+        $data->verified =$request->verified;
+
        
        
 
         if($data->save()){
-            return redirect('/userstable')->with('status', 'User edited Successfully!');
+            return redirect('/admin/userstable')->with('status', 'User Updated Successfully!');
         }
         else{
-            return redirect('/userstable/$id/edit')->with('status', 'There was an error');
+            return redirect('/admin/userstable/$id/edit')->with('status', 'There was an error');
 
         }
         //
@@ -135,9 +139,9 @@ function update(Request $request, $id)
         //Delete
         $data = User::find($id);
         if($data->delete()){
-            return redirect('/userstable')->with('status', 'User was deleted successfully');
+            return redirect('/admin/userstable')->with('status', 'User was deleted successfully');
         }
-        else return redirect('/userstable')->with('status', 'There was an error');
+        else return redirect('/admin/userstable')->with('status', 'There was an error');
 
         
     }

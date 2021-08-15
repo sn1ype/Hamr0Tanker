@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="{{ URL::asset('plugins/chartist-plugin-tooltip.css')}}">
     <!-- Custom CSS -->
     <link href="{{ URL::asset('css/style.min.css') }} " rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
 </head>
 
 <body>
@@ -112,7 +114,7 @@
                     <ul id="sidebarnav">
                         <!-- User Profile-->
                         <li class="sidebar-item pt-2">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/userstable"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/userstable"
                                 aria-expanded="false">
                                 <i class="far fa-clock" aria-hidden="true"></i>
                                 <span class="hide-menu">Users</span>
@@ -127,7 +129,7 @@
                         </li>
                       
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/carousel"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/carousel"
                                 aria-expanded="false">
                                 <i class="fa fa-columns" aria-hidden="true"></i>
                                 <span class="hide-menu">Carousel</span>
@@ -135,17 +137,24 @@
                         </li>
 
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/tanker"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/tanker"
                                 aria-expanded="false">
                                 <i class="fa fa-columns" aria-hidden="true"></i>
                                 <span class="hide-menu">Tanker</span>
                             </a>
                         </li>
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/orders"
+                                aria-expanded="false">
+                                <i class="fa fa-columns" aria-hidden="true"></i>
+                                <span class="hide-menu">Orders</span>
+                            </a>
+                        </li>
                        
                         <li class="text-center p-20 upgrade-btn">
-                            <a href="/"
-                                class="btn d-grid btn-danger text-white">
-                                Homepage</a>
+                            <form action="/" method="GET"> <input style="width:200px" class="btn d-grid btn-danger text-white" type="submit" value="Homepage"></form>
+                            
                         </li>
                     </ul>
 

@@ -13,7 +13,7 @@
 @endif
     <div class="container">
   
-    <form action="/tanker/{{$data->id}}" method="POST" enctype='multipart/form-data'>
+    <form action="/admin/tanker/{{$data->id}}" method="POST" enctype='multipart/form-data'>
         <div class="form-group">
            
             @csrf
@@ -34,13 +34,14 @@
             <input type="number" class="form-control" id="exampleInputPassword1"  name="capacity" value="{{$data->capacity}}">
           </div><br>
           <div class="form-group">
-            <label for="exampleInputPassword1">Previous Image of  {{$data->name}} :<br><span><img style="width: 200px;height:100px" src="{{asset('/images/tanker/'.$data["image"])}}"/></span></label>
-            <input type="file" class="form-control" name="image" required>
+            <label for="exampleInputPassword1">Current Image of  {{$data->name}} :<br>@if($data['image']=='image.png')  <p> Sorry no image found.</p> @else <span><img style='width: 200px;height:130px' src='{{asset("/images/tanker/".$data["image"])}}'/></span>@endif</label>
+            <input type="file" class="form-control" name="image">
           </div><br>
         <button type="submit" class="btn btn-success">Update Tanker</button>
       </form>
-      <div style="margin-top:10px"><a href="/tanker"><button style="width: 116px" class="btn btn-danger">Cancel</button></a></div>
-    </div>
+      <form action="/admin/tanker">
+      <div style="margin-top:10px"><button type="submit" style="width: 116px" class="btn btn-danger">Cancel</button></a></div>
+    </div></form>
       
     </div>
 

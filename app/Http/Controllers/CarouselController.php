@@ -15,7 +15,7 @@ class CarouselController extends Controller
         // dd($posts);
         // $JSONfile = json_encode($posts);
         // dd($JSONfile);
-        return view('admin.carousel.main',compact('data'));
+        return view('admin.carousel',compact('data'));
     }
 
     /**
@@ -41,20 +41,20 @@ class CarouselController extends Controller
         //CREATE
         // dd($request->all());
         $request->validate([
-            'name' => 'required',
-            'desc' => 'required',
+          
             'gallery' => 'required',
-            'image' => 'required'
+            
+            
         ]);
         
         if ($file = $request->file('gallery')) {
             $request->validate([
-                'gallery' =>'mimes:jpg,jpeg,png,bmp'
+                'image' =>'mimes:jpg,jpeg,png,bmp'
             ]);
             $image = $request->file('gallery');
             $imgExt = $image->getClientOriginalExtension();
             $fullname = time().".".$imgExt;
-            $result = $image->storeAs('gallery/carousel',$fullname);
+            $result = $image->storeAs('images/carousel',$fullname);
             }
     
             else{
@@ -69,10 +69,10 @@ class CarouselController extends Controller
 
         if($data->save()){
             //Redirect with Flash message
-            return redirect('/slider')->with('status', 'Carousel added Successfully!');
+            return redirect('/admin/carousel')->with('status', 'Carousel added Successfully!');
         }
         else{
-            return redirect('/slider/create')->with('status', 'There was an error!');
+            return redirect('/admin/carousel/create')->with('status', 'There was an error!');
         }
 
     }
@@ -115,9 +115,10 @@ class CarouselController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $data = Carousel::find($id);
         if ($file = $request->file('gallery')) {
             $request->validate([
-                'gallery' =>'mimes:jpg,jpeg,png,bmp'
+                'image' =>'mimes:jpg,jpeg,png,bmp'
             ]);
             $image = $request->file('gallery');
             $imgExt = $image->getClientOriginalExtension();
@@ -126,20 +127,20 @@ class CarouselController extends Controller
             }
     
             else{
-                $fullname = 'image.png';
+                $fullname = $data->gallery;
             }
         //Update
-        $data = Carousel::find($id);
+       
         $data->name = $request->name;
         $data->desc = $request->desc;
         $data->gallery = $fullname;
         
 
         if($data->save()){
-            return redirect('/slider')->with('status', 'Carousel edited Successfully!');
+            return redirect('/admin/carousel')->with('status', 'Carousel updated successfully!');
         }
         else{
-            return redirect('/slider/$id/edit')->with('status', 'There was an error');
+            return redirect('/admin/carousel/$id/edit')->with('status', 'There was an error');
 
         }
         //
@@ -156,9 +157,9 @@ class CarouselController extends Controller
         //Delete
         $data = Carousel::find($id);
         if($data->delete()){
-            return redirect('/slider')->with('status', 'Carousel was deleted successfully');
+            return redirect('/admin/carousel')->with('status', 'Carousel was deleted successfully');
         }
-        else return redirect('/slider')->with('status', 'There was an error');
+        else return redirect('/admin/carousel')->with('status', 'There was an error');
 
         
     }

@@ -1,7 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Usercontroller;
+use App\Http\Controllers\TankerController;
+use App\Http\Controllers\WaterController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CarouselController;
+Use App\Http\Controllers\FrontEndController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,64 +30,55 @@ Route::namespace('App\Http\Controllers')->group(function ()
    
 
     Route::get('/','FrontendController@index');
-
-    //Read all the Posts
-    Route::get('/tanker','TankerController@index');
-
-    //Create a new post
-    Route::get('/tanker/create','TankerController@create'); //View
-    Route::post('/tanker','TankerController@store'); //Logical Part
-
-    //Edit a POST
-    Route::get('/tanker/{id}/edit','TankerController@edit'); //View
-    Route::post('/tanker/{id}','TankerController@update'); //Logical Part
-
-    //Show individual data
-    Route::get('/tanker/{id}','TankerController@show');
-
-    //Delete an indicidual post
-    Route::delete('/tanker/{id}','TankerController@destroy');
-
-     //Read all the Posts
-     Route::get('/userstable','UserController@index');
-
-     //Create a new post
-     Route::get('/userstable/create','UserController@create'); //View
-     Route::post('/userstable','UserController@store'); //Logical Part
- 
-     //Edit a POST
-     Route::get('/userstable/{id}/edit','UserController@edit'); //View
-     Route::post('/userstable/{id}','UserController@update'); //Logical Part
- 
-     //Show individual data
-     Route::get('/userstable/{id}','UserController@show');
- 
-     //Delete an indicidual post
-     Route::delete('/userstable/{id}','UserController@destroy');
-   
-
-      //Read all the Posts
-      Route::get('/slider','CarouselController@index');
-
-      //Create a new post
-      Route::get('/slider/create','CarouselController@create'); //View
-      Route::post('/slider','CarouselController@store'); //Logical Part
-  
-      //Edit a POST
-      Route::get('/slider/{id}/edit','CarouselController@edit'); //View
-      Route::post('/slider/{id}','CarouselController@update'); //Logical Part
-  
-      //Show individual data
-      Route::get('/slider/{id}','CarouselController@show');
-  
-      //Delete an indicidual post
-      Route::delete('/slider/{id}','CarouselController@destroy');
-
-
-      Route::get('/admin','FrontendController@dashboard');
+      Route::get('/user','FrontendController@User');
+      Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+      Route::get('/tanker/{id}', 'TankerController@ViewProduct');
+      Route::get('/order/{id}','OrderController@OrderTanker');
+      Route::get('/error','FrontendController@Error');
+      Route::get('/confirmorder/{id}','OrderController@ConfirmOrder');
       Route::get('/profile','FrontendController@profile');
-      Route::get('/userstable','FrontendController@usersTable');
-      Route::get('/carousel','FrontendController@carousel');
-      Route::get('/tanker','FrontendController@Tanker');
+      Route::get('/myorders','FrontendController@MyOrder');
+      Route::post('/myorders/{tanker_id}','OrderController@store');
+      Route::delete('/cancelorder/{id}','OrderController@destroy');
+      
+      
+    
 });
 
+
+Route::group(['prefix'=>'admin','middleware'=>'admin'],function (){
+    Route::get('/',[FrontendController::class, 'dashboard']);
+    Route::group(['prefix'=>'carousel','middleware'=>'auth'],function (){
+        
+        Route::get('/',[CarouselController::class, 'index']);
+        Route::get('/create',[CarouselController::class, 'create']);
+        Route::post('/',[CarouselController::class, 'store']);
+        Route::get('/{id}/edit',[CarouselController::class, 'edit']);
+        Route::post('/{id}',[CarouselController::class, 'update']);
+        Route::delete('/{id}',[CarouselController::class, 'destroy']);
+    });
+
+    Route::group(['prefix'=>'tanker','middleware'=>'auth'],function (){
+        Route::get('/',[TankerController::class, 'index']);
+        Route::get('/create',[TankerController::class, 'create']);
+        Route::post('/',[TankerController::class, 'store']);
+        Route::get('/{id}/edit',[TankerController::class, 'edit']);
+        Route::post('/{id}',[TankerController::class, 'update']);
+        Route::delete('/{id}',[TankerController::class, 'destroy']);
+    });
+
+    Route::group(['prefix'=>'userstable','middleware'=>'auth'],function (){
+        Route::get('/',[UserController::class, 'index']);
+        Route::get('/create',[UserController::class, 'create']);
+        Route::post('/',[UserController::class, 'store']);
+        Route::get('/{id}/edit',[UserController::class, 'edit']);
+        Route::post('/{id}',[UserController::class, 'update']);
+        Route::delete('/{id}',[UserController::class, 'destroy']);
+    });
+
+
+    Route::group(['prefix'=>'orders','middleware'=>'auth'],function (){
+        Route::get('/',[OrderController::class, 'Orders']);
+    
+    });
+});

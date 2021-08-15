@@ -15,7 +15,9 @@
 <body>
     {{View::make('header')}}
     @yield("content");
-    {{View::make('footer')}}
+    <div></div>
+    <div style="height: 100px">{{View::make('footer')}}</div>
+    
 </body>
 <style>
     @import url('https://fonts.googleapis.com/css?family=Open+Sans');
@@ -103,7 +105,7 @@ body {
 
 #ads .card:hover {
             background: #fff;
-            box-shadow: 12px 15px 20px 0px rgba(46,61,73,0.15);
+            box-shadow: 12px 15px 20px 0px rgba(75, 94, 109, 0.15);
             border-radius: 4px;
             transition: all 0.3s ease;
         }
@@ -167,7 +169,8 @@ body {
         margin-top: -20px;
     }
     .slider-text{
-        background-color: #3747376b !important;
+        background-color: #60626b4d !important;
+        border-radius: 12px;
     }
     .trending-image{
         height: 100px;

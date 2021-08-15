@@ -3,9 +3,11 @@
     
 
 @if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
-    </div>
+<div>
+    <b-alert show dismissible>
+      SUCCESS! {{session('status')}} <b>&rArr;</b>
+    </b-alert>
+  </div>
 @endif
 
 <table class="table">
