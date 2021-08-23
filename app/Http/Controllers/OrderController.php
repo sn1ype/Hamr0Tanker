@@ -115,12 +115,86 @@ class OrderController extends Controller
         
                 
             }
-public function Orders(){
-    return view('admin.manageorder.orders');
-}
-
-
+        public function Orders()
+        {
+           
+            $orders= Orders::where('status','<>','delivered' )->get();
+                return view('admin.manageorder.orders',compact('orders'));
         }
+
+        public function OrdersArchive()
+        {
+            $orders= Orders::where('status','=','delivered')->get();
+                return view('admin.manageorder.closedorders',compact('orders'));
+        }
+
+
+
+
+        public function ChangeOrderStatus($id)
+        {
+               
+                //Update
+                $data = Orders::find($id);
+              
+               if($data)
+               {
+                   $data->status='confirmed';
+               }
+               $data->save();
+               if($data->save())
+               {
+                return redirect('/admin/orders')->with('status', 'Order Confirmed Successfully!');
+               }
+              
+               
+                   
+    
+            }
+
+
+            public function OrderDelivered($id)
+            {
+                   
+                    //Update
+                    $data = Orders::find($id);
+                  
+                   if($data)
+                   {
+                       $data->status='delivered';
+                   }
+                   $data->save();
+                   if($data->save())
+                   {
+                    return redirect('/admin/orders')->with('status', 'Order Delivered Successfully!');
+                   }
+                  
+                   
+                       
+        
+                }
+                public function OrderClosed($id)
+                {
+                       
+                        //Update
+                        $data = Tanker::find($id);
+                      
+                       if($data)
+                       {
+                           $data->status='available';
+                       }
+                       $data->save();
+                       if($data->save())
+                       {
+                        return redirect('/admin/orders/ordersarchive')->with('status', 'Order closed Successfully!');
+                       }
+                      
+                       
+                           
+            
+                    }
+
+    }
    
 
     

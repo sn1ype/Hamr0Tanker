@@ -82,9 +82,10 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],function (){
 
     Route::group(['prefix'=>'orders','middleware'=>'auth'],function (){
         Route::get('/',[OrderController::class, 'Orders']);
-        Route::get('/orderleft/{$id}',[OrderController::class, 'Orders']);
-        Route::get('/orderdelivered/{id}',[OrderController::class, 'Orders']);
-        Route::get('/ordercanceled/{id}',[OrderController::class, 'Orders']);
+        Route::get('/ordersarchive',[OrderController::class, 'OrdersArchive']);
+        Route::get('/orderleft/{id}',[OrderController::class, 'ChangeOrderStatus']);
+        Route::get('/orderdelivered/{id}',[OrderController::class, 'OrderDelivered']);
+        Route::get('/closeorder/{tanker_id}',[OrderController::class, 'OrderClosed']);
         
     
     });

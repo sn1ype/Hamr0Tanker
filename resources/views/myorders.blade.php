@@ -230,7 +230,7 @@ $carousel=Carousel::all();
         
           <div class="fruit_container">
             <div class="box">
-              <img style="height:250px;width:100%;padding-bottom:20px" src="{{asset('/images/tanker/'.$item["image"])}}" alt="">
+              <img style="height:250px;width:100%;padding-bottom:20px" src="{{asset('/images/orders/order.jpg')}}" alt="">
               <div>
                 <h5>
                 Name   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  {{$item->user_name}}
@@ -242,7 +242,7 @@ $carousel=Carousel::all();
                    Price &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Rs.{{$item->price}}
                    </h5>
                    <h5>
-                        Status &nbsp;&nbsp;&nbsp;&nbsp; : {{$item->status}}
+                        Status &nbsp;&nbsp;&nbsp;&nbsp; : {{$item->status}} @if($item['status']=='confirmed') <br><br><span style="color: green">Your Order has been confirmed by Admin <br> [we will call you asap]</span>@elseif($item['status']=='canceled')<br><span style="color: red">Sorry,Your Order has been canceled by Admin<br>[Try another Tanker]</span>@elseif($item['status']=='delivered')<br><br><span style="color: blue">Thank You for choosing us</span><br><span><button class="btn btn-success"><a style="text-decoration: none;color:white" href="/">Browse Tankers</a></button></span> @endif
                         </h5>
               </div>
             </div>

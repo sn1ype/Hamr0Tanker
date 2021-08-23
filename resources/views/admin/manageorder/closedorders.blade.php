@@ -1,4 +1,5 @@
 
+
 @extends('admin.dashboard')
 @section('content')
 <div class="container-fluid">
@@ -11,7 +12,7 @@
     <div class="custom-product">
         <div class="col-sm-12">
          <div class="trending-wrapper">
-             <h4>Active Orders</h4><br>
+             <h4>Closed Orders</h4><br>
              @foreach ($orders as $item)
              <div class="row searched-item cart-list-divider">
              <div class="col-sm-3">
@@ -40,16 +41,14 @@
                  
                 <div class="item-desc">
                 <div>
-                <button class="btn btn-danger"><a href="/admin/orders/orderleft/{{$item->id}}"> Order Left</button></a><br><br>
-                <button class="btn btn-danger"><a href="/admin/orders/orderdelivered/{{$item->id}}">Order delivered</button></a>
+                    @if (session('status'))
+                    <div class="alert alert-success" id="clickme" >
+                        {{ session('status') }}
+                    </div>
+                @endif
                 <button class="btn btn-danger"><a href="/admin/orders/closeorder/{{$item->tanker_id}}">Close Order</button></a>
             </div>
-                @if($item["status"]=="pending")
-                <form action="/ordercanceled/{{$item->id}}" method="POST">
-                        @csrf
-                        @method('delete')
-                <button class="btn btn-danger">Cancel Order</button>
-        </form>@endif
+                
             </div>
                      
              </div>
