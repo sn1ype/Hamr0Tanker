@@ -120,4 +120,48 @@ class TestimonyController extends Controller
 
     }
 
+    public function edit($id)
+    {
+        //Update View
+        
+        $data = Testimony::where('id',$id)->first();
+        return view('admin.testimony.edit',compact('data'));
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        $data = Testimony::find($id);
+        if ($file = $request->file('image')) {
+            $request->validate([
+                'image' =>'mimes:jpg,jpeg,png,bmp'
+            ]);
+            $image = $request->file('image');
+            $imgExt = $image->getClientOriginalExtension();
+            $fullname = time().".".$imgExt;
+            $result = $image->storeAs('images/tanker',$fullname);
+            }
+    
+            else{
+                $fullname = $data->image;
+            }
+
+        //Update
+        $data = Testimony::find($id);
+        $data->name = $request->name;
+        $data->desc = $request->desc;
+        $data->subject = $request->subject;
+        $data->status = $request->status;
+        $data->image=$fullname;
+
+        if($data->save()){
+            return redirect('/admin/testimony')->with('status', 'Tanker updated Successfully!');
+        }
+        else{
+            return redirect('/admin/testimony/$id/edit')->with('status', 'There was an error');
+
+        }
+        //
+    }
+
 }

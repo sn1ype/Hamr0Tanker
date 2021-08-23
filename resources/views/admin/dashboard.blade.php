@@ -160,7 +160,8 @@
                         </li>
                        
                         <li class="text-center p-20 upgrade-btn">
-                            <form action="/" method="GET"> <input style="width:200px" class="btn d-grid btn-danger text-white" type="submit" value="Homepage"></form>
+                            <form action="/" method="GET"> <input style="width:200px" class="btn d-grid btn-info text-white" type="submit" value="Homepage"></form><br/>
+                            <form action="/logout" method="GET"> <input style="width:200px" class="btn d-grid btn-danger text-white" type="submit" value="Logout"></form>
                             
                         </li>
                     </ul>

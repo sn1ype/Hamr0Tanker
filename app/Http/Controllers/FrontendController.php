@@ -19,7 +19,7 @@ class FrontendController extends Controller
         $products= Tanker::where('status','=','available')->get();
         $tanker= Tanker::where('status','=','Booked')->get();
         $count=Tanker::where('status','booked')->count();
-        $testimony=Testimony::all();
+        $testimony=Testimony::where('status','=','confirmed')->get();
        
                
         return view('product2',compact('carousel','products','tanker','testimony','count'));

@@ -92,6 +92,8 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],function (){
         Route::get('/',[TestimonyController::class, 'index']);
         Route::get('/create',[TestimonyController::class, 'create']);
         Route::post('/',[TestimonyController::class, 'store']);
+        Route::get('/{id}/edit',[TestimonyController::class, 'edit']);
+        Route::post('/{id}',[TestimonyController::class, 'update']);
 
     });
 });

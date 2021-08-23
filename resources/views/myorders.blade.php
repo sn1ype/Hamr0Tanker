@@ -114,6 +114,7 @@ $carousel=Carousel::all();
               <img style="max-width: 100%;height:100%" src="{{asset('images/carousel/'.$item["gallery"])}}" alt="">
             </div>
           </div>
+          @endforeach
         </div>
        
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -122,7 +123,7 @@ $carousel=Carousel::all();
         <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
           <span class="sr-only">Next</span>
         </a>
-        @endforeach
+        
       </div> 
     </section>
 

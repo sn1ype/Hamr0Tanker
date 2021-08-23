@@ -19,6 +19,7 @@ class CreateTestimonyTable extends Migration
             $table->string("subject");
             $table->string("desc");
             $table->string("image");
+            $table->string("status")->default('notconfirmed');
             $table->timestamps();
         });
     }

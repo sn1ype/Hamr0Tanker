@@ -32,6 +32,7 @@ $( "#clickme" ).click(function() {
                                             <th class="border-top-0">Name</th>
                                             <th class="border-top-0">Description</th>
                                             <th class="border-top-0">Subject</th>
+                                            <th class="border-top-0">Status</th>
                                             <th class="border-top-0">Image</th>
                                             <th colspan="3" class="border-top-0">Actions</th>
                                         </tr>
@@ -43,9 +44,10 @@ $( "#clickme" ).click(function() {
                                             <td>{{$post->name}}</td>
                                             <td>View Desc in edit page</td>
                                             <td>{{$post->subject}}</td>
+                                            <td>{{$post->status}}</td>
                                             <td><img style='width: 250px;height:90px' src='{{asset("/images/testimony/".$post["image"])}}'/></td>
-                                            <td style="width: 40px;"><a href="/admin/carousel/{{$post->id}}/edit"><button class="btn btn-success">Update</button></a></td>
-                                            <form method="POST" action="/admin/carousel/{{$post->id}}">
+                                            <td style="width: 40px;"><a href="/admin/testimony/{{$post->id}}/edit"><button class="btn btn-success">Update</button></a></td>
+                                            <form method="POST" action="/admin/testimony/{{$post->id}}">
                                                 @csrf
                                                 @method('delete')
                                                 <td><input class="btn btn-danger" type="submit" value="Delete"></td>
@@ -63,32 +65,10 @@ $( "#clickme" ).click(function() {
                         </div>
                     </div>
                 </div>
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- .right-sidebar -->
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
+              
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
-    </div>
+    
+    
    
     
    @endsection
