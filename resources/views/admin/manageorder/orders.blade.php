@@ -33,25 +33,31 @@ $orders=Orders::all();
                         <h5>Payment Status : {{$item->payment}} on delivery</h5>
                         <h5>Deleviry Status : {{$item->status}}</h5>
                         <h5>Number : {{$item->number}}</h5>
+                        <h5>Address : {{$item->address}}</h5>
+                        <h5>Street : {{$item->street}}</h5>
                       
                 </div>
              
              </div>
+             </div>
              <div class="col-sm-3">
                  
                 <div class="item-desc">
-                        <form action="/cancelorder/{{$item->id}}" method="POST">
+                    @if($item["status"]=="pending")
+                        <form action="/ordercanceled/{{$item->id}}" method="POST">
                                 @csrf
                                 @method('delete')
                         <button class="btn btn-danger">Cancel Order</button>
-                </form>
+                </form>@endif<br>
+                <button class="btn btn-danger"><a href="/orderleft/{{$item->id}}"> Order Left</button></a><br><br>
+                <button class="btn btn-danger"><a href="/orderdelivered/{{$item->id}}">Order delivered</button></a>
                 </div>
-                
+                     
              </div>
        </div>
       @endforeach
      </div>
-        </div>
+       
      </div>
 
 

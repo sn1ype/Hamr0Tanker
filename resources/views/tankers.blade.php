@@ -36,7 +36,7 @@
             </div>
             <div class="card-body text-center">
                 <div class="ad-title m-auto">
-                    <h5>Tanker</h5>
+                   
                 </div></a>
                
             </div>

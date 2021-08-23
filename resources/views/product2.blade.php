@@ -1,65 +1,7 @@
-{{-- 
-
-@extends('master')
-@section('content')
-
-<div style="height: 900px" class="containeer">
-
-    <div class="custom-product">
-        <div class="col-sm-10">
-         <div class="trending-wrapper">
-             <h4>My Orders</h4><br>
-             @foreach ($orders as $item)
-             <div class="row searched-item cart-list-divider">
-             <div class="col-sm-3">
-                
-                     <img class="trending-image" src="{{asset('/images/tanker/'.$item['image'])}}">
-     
-              
-             </div>
-             <div class="col-sm-4">
-                 
-                <div class="item-desc">
-                        <h2>{{$item->tanker_name}}</h2>
-                        <h5>User : {{$item->user_name}}</h5>
-                        <h5>Payment Status : {{$item->payment}} on delivery</h5>
-                        <h5>Status : {{$item->status}}</h5>
-                      
-                </div>
-             
-             </div>
-             <div class="col-sm-3">
-                @if($item["status"]=="pending")
-                <div class="item-desc">
-                       
-                        <form action="/cancelorder/{{$item->id}}" method="POST">
-                                @csrf
-                                @method('delete')
-                        <button class="btn btn-danger">Cancel Order</button>
-                </form>
-                </div>@endif
-                
-             </div>
-       </div>
-      @endforeach
-     </div>
-        </div>
-     </div>
-
-
-</div>
-
-
-@endsection --}}
-
-
-
 
 <?php
-use App\Models\Carousel;
 
 $user = auth()->user();
-$carousel=Carousel::all();
 ?>
 <!DOCTYPE html>
 <html>
@@ -105,7 +47,7 @@ $carousel=Carousel::all();
           </div>
           @foreach ($carousel as $item)
           <div class="carousel-item">
-           
+            
             <div class="carousel-caption d-none d-md-block slider-text">
                 <h3 class="display-4">{{$item->name}}</h3>
                 <p class="lead">{{$item->desc}}</p>
@@ -114,6 +56,7 @@ $carousel=Carousel::all();
               <img style="max-width: 100%;height:100%" src="{{asset('images/carousel/'.$item["gallery"])}}" alt="">
             </div>
           </div>
+          @endforeach
         </div>
        
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -122,7 +65,7 @@ $carousel=Carousel::all();
         <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
           <span class="sr-only">Next</span>
         </a>
-        @endforeach
+        
       </div> 
     </section>
 
@@ -159,7 +102,7 @@ $carousel=Carousel::all();
                 @if(Auth::user())
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" data-target="#navItemGame"  id="navbarDropdown" role="button" data-toggle="dropdown" v-pre ><?php
-                    print($user->name); ?> @if($user['verified']=='2')<img style='width: 25px;height:25px' title="Verified" src='{{asset("/images/badges/admin.png")}}'/>@endif
+                    print($user->name);?> @if($user['verified']=='2')<img style='width: 25px;height:25px' title="Verified" src='{{asset("/images/badges/admin.png")}}'/>@endif
                   </a>
                 
                 <div id="#navItemGame" class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -206,7 +149,51 @@ $carousel=Carousel::all();
     </div>
   </section>
 
+  <!-- end nav section -->
+
+  <!-- shop s@ection -->
  
+      
+ 
+@if($count!=0)
+
+  <section class="shop_section layout_padding">
+    <div class="container">
+      <div class="box">
+        <div class="detail-box">
+          <h2>
+           Currently Booked/Deleverying 
+          </h2>
+          <p>
+            There are many variations of passages of Lorem Ipsum available
+          </p>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+        @foreach ($tanker as $item)
+        <div style="margin-bottom: 30px" class="col-md-3">
+        <div class="img-box">
+          <img style="height:250px;width:100%;padding-bottom:20px" src="{{asset('/images/tanker/'.$item["image"])}}" alt="">
+        <p>Capacity : {{$item->capacity}}L</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price &nbsp;&nbsp;&nbsp; :&nbsp; Rs.{{$item->price}}</p>
+        </div>
+        <div class="btn-box">
+          <a onclick="alert('Sorry this tanker is being delivered')">
+            ❌ Booked
+          </a>
+        </div>
+        </div>
+        @endforeach
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ @endif
+ 
+  <!-- end shop section -->
+
+  <!-- about section -->
 
   
   <section class="shop_section layout_padding">
@@ -214,25 +201,24 @@ $carousel=Carousel::all();
   <div class="box">
   <div class="detail-box">
     <h2>
-      My Orders
+      Available Tankers
     </h2>
     <p>
       There are many variations of passages of Lorem Ipsum available
     </p>
   </div></div></div></section>
-
   <!-- end about section -->
   <div class="container-fluid">
     <div class="row">
-        @foreach ($orders as $item)
+    @foreach ($products as $item)
     <div style="margin-bottom: 30px" class="col-md-3"> 
-        
+        <a style="text-decoration: none;color:grey" href="/tanker/{{$item->id}}">
           <div class="fruit_container">
             <div class="box">
               <img style="height:250px;width:100%;padding-bottom:20px" src="{{asset('/images/tanker/'.$item["image"])}}" alt="">
               <div>
                 <h5>
-                Name   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  {{$item->user_name}}
+                Name   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  {{$item->name}}
                 </h5>
                 <h5>
                     Capacity : {{$item->capacity}}L
@@ -240,22 +226,10 @@ $carousel=Carousel::all();
                    <h5>
                    Price &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Rs.{{$item->price}}
                    </h5>
-                   <h5>
-                        Status &nbsp;&nbsp;&nbsp;&nbsp; : {{$item->status}}
-                        </h5>
               </div>
             </div>
-          </div class="btn-box">
-          @if($item["status"]=="pending")
-                <div class="item-desc">
-                       
-                        <form action="/cancelorder/{{$item->id}}" method="POST">
-                                @csrf
-                                @method('delete')
-                        <button class="btn btn-danger">Cancel Order</button>
-                </form>
-                </div>@endif
-                
+          </div>
+                </a>
             </div>
             @endforeach
            
@@ -264,17 +238,169 @@ $carousel=Carousel::all();
           <br/>
           <br/>
           <br/>
-         
+          <section class="about_section">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6 px-0">
+                  <div class="img-box">
+                    <img src="{{asset('/images/tanker/1619871454.jpg')}}" alt="">
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="detail-box">
+                    <div class="heading_container">
+                      <hr>
+                      <h2>
+                        About Our Service
+                      </h2>
+                    </div>
+                    <p>
+                      There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour
+                    </p>
+                    <a href="/about_us">
+                      Read More
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <br/>
+          <br/>
+          <br/>
       
 
   <!-- client section -->
 
-  
+  <section class="client_section layout_padding-bottom">
+    <div class="container ">
+      <div class="heading_container">
+        <h2>
+          Cutomer Says What?
+        </h2>
+        <hr>
+      </div>
+    
+      <div id="carouselExample2Controls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            
+          <div class="carousel-item active">
+            <div class="client_container layout_padding-top">
+              <div class="img-box">
+                <img src="{{asset("/images/testimony/default.png")}}" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                 Name
+                </h5>
+                <p>
+                  <img src="images/left-quote.png" alt="">
+                  <span>
+                    Subject
+                  </span>
+                  <img src="images/right-quote.png" alt=""> <br>
+                 description
+                </p>
+                
+              </div>
+            
+            </div>
+            
+          </div>
+          @foreach ($testimony as $item)
+          <div class="carousel-item">
+            <div class="client_container layout_padding-top">
+              <div class="img-box">
+                <img src="{{asset("/images/testimony/".$item["image"])}}" alt="">
+              </div>
+              <div class="detail-box">
+                <h5>
+                 {{$item->name}}
+                </h5>
+                <p>
+                  <img src="images/left-quote.png" alt="">
+                  <span>
+                    {{$item->subject}}
+                  </span>
+                  <img src="images/right-quote.png" alt=""> <br>
+                  {{$item->desc}}
+                </p>
+                
+              </div>
+            
+            </div>
+            
+          </div>
+          @endforeach
+        </div> 
+        <a class="carousel-control-prev" href="#carouselExample2Controls" role="button" data-slide="prev">
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExample2Controls" role="button" data-slide="next">
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+     
+    </div>
+  </section>
+
   <!-- end client section -->
 
 
   <!-- contact section -->
-  
+  <section class="contact_section layout_padding-bottom">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="offset-lg-2 col-md-10 offset-md-1">
+          <div class="heading_container">
+            <hr>
+            <h2>
+              Request A call back
+            </h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="layout_padding2-top">
+        <div class="row">
+          <div class="col-lg-4 offset-lg-2 col-md-5 offset-md-1">
+            <form action="">
+              <div class="contact_form-container">
+                <div>
+                  <div>
+                    <input type="text" placeholder="Full Name" />
+                  </div>
+                  <div>
+                    <input type="email" placeholder="Email" />
+                  </div>
+                  <div>
+                    <input type="text" placeholder="Phone Number" />
+                  </div>
+                  <div>
+                    <input type="text" class="message_input" placeholder="Message" />
+                  </div>
+                  <div>
+                    <button type="submit">
+                      Send
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6 px-0">
+            <div class="map_container">
+              <div class="map-responsive">
+                <iframe src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJOfOCwd0Z6zkRgSAB3QaRAOw&key=AIzaSyC3o5eBytuPJij6ieGzZeFPaf90enpBQvk" width="600" height="300" frameborder="0" style="border:0; width: 100%; height:100%" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end contact section -->
+
 
   <!-- info section -->
 

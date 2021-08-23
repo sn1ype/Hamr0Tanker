@@ -18,7 +18,8 @@
     <th style="width: 40px;text-align:center;">Price</th>
     <th style="width: 40px;text-align:center;">Capacity</th>
     <th style="width: 40px;text-align:center;">Image</th>
-    <th style="width: 40px;text-align:center;"></th>
+    <th style="width: 40px;text-align:center;">Status</th>
+    <th style="width: 40px;text-align:center;">Description</th>
     <th colspan="3">Actions</th>
 </tr>
 @foreach ($data as $post )
@@ -29,7 +30,8 @@
         <td style="width: 40px;text-align:center;">{{$post->price  }}</td>
         <td style="width: 40px;text-align:center;">{{$post->capacity}}</td>
         <td style="width: 40px;text-align:center;">{{$post->image}}</td>
-        <td style="width: 40px;text-align:center;"></td>
+        <td style="width: 40px;text-align:center;">{{$post->status}}</td>
+        <td style="width: 40px;text-align:center;">View desc in update page</td>
         <td style="width: 40px;text-align:center;"><form action="/admin/tanker/{{$post->id}}/edit" method="GET"> <input class="btn btn-success" type="submit" value="Update"></form></td>
         <form method="POST" action="/admin/tanker/{{$post->id}}">
         @csrf

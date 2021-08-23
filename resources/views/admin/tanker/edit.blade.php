@@ -34,6 +34,10 @@
             <input type="number" class="form-control" id="exampleInputPassword1"  name="capacity" value="{{$data->capacity}}">
           </div><br>
           <div class="form-group">
+            <label for="exampleInputPassword1">Status</label>
+            <input type="text" class="form-control" id="exampleInputPassword1"  name="status" value="{{$data->status}}">
+          </div><br>
+          <div class="form-group">
             <label for="exampleInputPassword1">Current Image of  {{$data->name}} :<br>@if($data['image']=='image.png')  <p> Sorry no image found.</p> @else <span><img style='width: 200px;height:130px' src='{{asset("/images/tanker/".$data["image"])}}'/></span>@endif</label>
             <input type="file" class="form-control" name="image">
           </div><br>

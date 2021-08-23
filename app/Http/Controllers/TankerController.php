@@ -46,6 +46,7 @@ class TankerController extends Controller
             'name' => 'required',
             'desc' => 'required',
             'price' => 'required',
+            'status' => 'required',
             'capacity' => 'required',
             
         ]);
@@ -69,6 +70,7 @@ class TankerController extends Controller
             $data->desc = $request->desc;
             $data->price = $request->price;
             $data->capacity = $request->capacity;
+            $data->status = $request->status;
             $data->image = $fullname;
             $data->save();
 
@@ -141,6 +143,7 @@ class TankerController extends Controller
         $data->desc = $request->desc;
         $data->price = $request->price;
         $data->capacity = $request->capacity;
+        $data->status = $request->status;
         $data->image=$fullname;
 
         if($data->save()){

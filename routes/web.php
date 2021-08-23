@@ -7,6 +7,7 @@ use App\Http\Controllers\WaterController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CarouselController;
 Use App\Http\Controllers\FrontEndController;
+Use App\Http\Controllers\TestimonyController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -40,6 +41,8 @@ Route::namespace('App\Http\Controllers')->group(function ()
       Route::get('/myorders','FrontendController@MyOrder');
       Route::post('/myorders/{tanker_id}','OrderController@store');
       Route::delete('/cancelorder/{id}','OrderController@destroy');
+      Route::get('/testimonial','TestimonyController@createsecond');
+      Route::post('/testimony','TestimonyController@storesecond');
       
       
     
@@ -79,6 +82,16 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],function (){
 
     Route::group(['prefix'=>'orders','middleware'=>'auth'],function (){
         Route::get('/',[OrderController::class, 'Orders']);
+        Route::get('/orderleft/{$id}',[OrderController::class, 'Orders']);
+        Route::get('/orderdelivered/{id}',[OrderController::class, 'Orders']);
+        Route::get('/ordercanceled/{id}',[OrderController::class, 'Orders']);
+        
     
+    });
+    Route::group(['prefix'=>'testimony','middleware'=>'auth'],function (){
+        Route::get('/',[TestimonyController::class, 'index']);
+        Route::get('/create',[TestimonyController::class, 'create']);
+        Route::post('/',[TestimonyController::class, 'store']);
+
     });
 });

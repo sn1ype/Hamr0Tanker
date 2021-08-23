@@ -151,6 +151,13 @@
                                 <span class="hide-menu">Orders</span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/testimony"
+                                aria-expanded="false">
+                                <i class="fa fa-columns" aria-hidden="true"></i>
+                                <span class="hide-menu">Testimony</span>
+                            </a>
+                        </li>
                        
                         <li class="text-center p-20 upgrade-btn">
                             <form action="/" method="GET"> <input style="width:200px" class="btn d-grid btn-danger text-white" type="submit" value="Homepage"></form>

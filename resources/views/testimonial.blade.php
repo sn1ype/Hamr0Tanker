@@ -1,65 +1,10 @@
-{{-- 
-
-@extends('master')
-@section('content')
-
-<div style="height: 900px" class="containeer">
-
-    <div class="custom-product">
-        <div class="col-sm-10">
-         <div class="trending-wrapper">
-             <h4>My Orders</h4><br>
-             @foreach ($orders as $item)
-             <div class="row searched-item cart-list-divider">
-             <div class="col-sm-3">
-                
-                     <img class="trending-image" src="{{asset('/images/tanker/'.$item['image'])}}">
-     
-              
-             </div>
-             <div class="col-sm-4">
-                 
-                <div class="item-desc">
-                        <h2>{{$item->tanker_name}}</h2>
-                        <h5>User : {{$item->user_name}}</h5>
-                        <h5>Payment Status : {{$item->payment}} on delivery</h5>
-                        <h5>Status : {{$item->status}}</h5>
-                      
-                </div>
-             
-             </div>
-             <div class="col-sm-3">
-                @if($item["status"]=="pending")
-                <div class="item-desc">
-                       
-                        <form action="/cancelorder/{{$item->id}}" method="POST">
-                                @csrf
-                                @method('delete')
-                        <button class="btn btn-danger">Cancel Order</button>
-                </form>
-                </div>@endif
-                
-             </div>
-       </div>
-      @endforeach
-     </div>
-        </div>
-     </div>
-
-
-</div>
-
-
-@endsection --}}
-
-
-
 
 <?php
 use App\Models\Carousel;
 
-$user = auth()->user();
 $carousel=Carousel::all();
+
+$user = auth()->user();
 ?>
 <!DOCTYPE html>
 <html>
@@ -206,77 +151,71 @@ $carousel=Carousel::all();
     </div>
   </section>
 
- 
+  <!-- end nav section -->
 
-  
+  <!-- shop section -->
+
   <section class="shop_section layout_padding">
     <div class="container">
-  <div class="box">
-  <div class="detail-box">
-    <h2>
-      My Orders
-    </h2>
-    <p>
-      There are many variations of passages of Lorem Ipsum available
-    </p>
-  </div></div></div></section>
+      <div class="box">
+        <div class="detail-box">
+          <h2>
+          Add Testimony
+          </h2>
+          <p>
+            There are many variations of passages of Lorem Ipsum available
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- end about section -->
+ 
   <div class="container-fluid">
     <div class="row">
-        @foreach ($orders as $item)
-    <div style="margin-bottom: 30px" class="col-md-3"> 
+      <div class="col-sm-12">
+        <div class="white-box">
+          @if (session('status'))
+      <div class="alert alert-danger">
+          {{ session('status') }}
+      </div>
+  @endif
+          <div class="container">
+    <form action="/testimony" method="POST" enctype='multipart/form-data'>
+      <div class="form-group">
+          @csrf
         
-          <div class="fruit_container">
-            <div class="box">
-              <img style="height:250px;width:100%;padding-bottom:20px" src="{{asset('/images/tanker/'.$item["image"])}}" alt="">
-              <div>
-                <h5>
-                Name   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  {{$item->user_name}}
-                </h5>
-                <h5>
-                    Capacity : {{$item->capacity}}L
-                   </h5>
-                   <h5>
-                   Price &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Rs.{{$item->price}}
-                   </h5>
-                   <h5>
-                        Status &nbsp;&nbsp;&nbsp;&nbsp; : {{$item->status}}
-                        </h5>
-              </div>
-            </div>
-          </div class="btn-box">
-          @if($item["status"]=="pending")
-                <div class="item-desc">
-                       
-                        <form action="/cancelorder/{{$item->id}}" method="POST">
-                                @csrf
-                                @method('delete')
-                        <button class="btn btn-danger">Cancel Order</button>
-                </form>
-                </div>@endif
-                
-            </div>
-            @endforeach
-           
+        <label for="exampleInputEmail1">Name</label>
+        <input type="text" class="form-control"   placeholder="Name" name="name" value="{{$user->name }}" readonly>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Description</label>
+        <input type="text" class="form-control" placeholder="Enter Desc." name="desc">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Subject</label>
+        <input type="text" class="form-control"  placeholder="Enter Subject"  name="subject" required>
+      </div>
+      <br>
+      <div class="form-group">
+          <label for="exampleInputPassword1">Image</label>
+          <input type="file" class="form-control"   name="image" required>
+        </div>
+        <br>
+        
+      <button type="submit" class="btn btn-primary">Create Testimony</button>
+    </form>
+    <form action="/admin/carousel">
+      <div style="margin-top:10px"><button type="submit" style="width: 128px" class="btn btn-danger text-white">Cancel</button></a></div>
+    </div></form>
+        </div>
+        </div>
+      </div>
     </div>
-          </div>
-          <br/>
-          <br/>
-          <br/>
-         
-      
-
-  <!-- client section -->
-
-  
-  <!-- end client section -->
-
-
-  <!-- contact section -->
+  </div><br><br>
   
 
-  <!-- info section -->
+
 
   <section class="info_section layout_padding">
     <div class="container">
@@ -372,3 +311,7 @@ $carousel=Carousel::all();
 </body>
 
 </html>
+
+    
+
+

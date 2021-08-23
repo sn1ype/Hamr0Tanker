@@ -6,6 +6,7 @@ use App\Models\Carousel;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Auth;
 
 
 
@@ -14,8 +15,8 @@ class UserController extends Controller
     public function index()
     {
         //Read
-
-        $data = User::all();
+        $user = Auth::id();
+        $data = User::where('id',"!=", $user)->get();
         return view('admin.userstable',compact('data'));
     }
 

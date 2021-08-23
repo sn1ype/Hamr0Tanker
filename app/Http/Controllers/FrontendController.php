@@ -7,6 +7,7 @@ use App\Models\Carousel;
 use App\Models\Tanker;
 use App\Models\User;
 use App\Models\Orders;
+use App\Models\Testimony;
 use Auth;
 
 class FrontendController extends Controller
@@ -16,8 +17,12 @@ class FrontendController extends Controller
         //Read
         $carousel=Carousel::all();
         $products= Tanker::where('status','=','available')->get();
+        $tanker= Tanker::where('status','=','Booked')->get();
+        $count=Tanker::where('status','booked')->count();
+        $testimony=Testimony::all();
+       
                
-        return view('tankers',compact('carousel','products'));
+        return view('product2',compact('carousel','products','tanker','testimony','count'));
     }
     
     public function dashboard()

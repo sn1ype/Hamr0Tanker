@@ -31,6 +31,7 @@ $( "#clickme" ).click(function() {
                                             <th class="border-top-0">ID</th>
                                             <th class="border-top-0">Name</th>
                                             <th class="border-top-0">Description</th>
+                                            <th class="border-top-0">Subject</th>
                                             <th class="border-top-0">Image</th>
                                             <th colspan="3" class="border-top-0">Actions</th>
                                         </tr>
@@ -40,8 +41,9 @@ $( "#clickme" ).click(function() {
                                         <tr>
                                             <td>{{$post->id}}</td>
                                             <td>{{$post->name}}</td>
-                                            <td>{{$post->desc}}</td>
-                                            <td><img style='width: 250px;height:90px' src='{{asset("/images/carousel/".$post["gallery"])}}'/></td>
+                                            <td>View Desc in edit page</td>
+                                            <td>{{$post->subject}}</td>
+                                            <td><img style='width: 250px;height:90px' src='{{asset("/images/testimony/".$post["image"])}}'/></td>
                                             <td style="width: 40px;"><a href="/admin/carousel/{{$post->id}}/edit"><button class="btn btn-success">Update</button></a></td>
                                             <form method="POST" action="/admin/carousel/{{$post->id}}">
                                                 @csrf
@@ -52,9 +54,9 @@ $( "#clickme" ).click(function() {
                                        @endforeach
                                     </tbody>
                                 </table>
-                                <form method="GET" action="/admin/carousel/create">
+                                <form method="GET" action="/admin/testimony/create">
    
-                                    <input class="btn btn-primary" type="submit" value="Add Carousel">
+                                    <input class="btn btn-primary" type="submit" value="Add Testimony">
                                     </form>
                                
                             </div>
