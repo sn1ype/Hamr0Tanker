@@ -46,8 +46,8 @@ class TankerController extends Controller
             'name' => 'required',
             'desc' => 'required',
             'price' => 'required',
-            'status' => 'required',
             'capacity' => 'required',
+            'water_source' => 'required'
             
         ]);
         
@@ -64,15 +64,16 @@ class TankerController extends Controller
             else{
                 $fullname = 'image.png';
             }
-
+            
             $data = new Tanker();
             $data->name = $request->name;
             $data->desc = $request->desc;
             $data->price = $request->price;
             $data->capacity = $request->capacity;
-            $data->status = $request->status;
+            $data->water_source = $request->water_source;
             $data->image = $fullname;
             $data->save();
+
 
         if($data->save()){
             //Redirect with Flash message
@@ -83,7 +84,6 @@ class TankerController extends Controller
         }
 
     }
-
     /**
      * Display the specified resource.
      *
@@ -143,6 +143,7 @@ class TankerController extends Controller
         $data->desc = $request->desc;
         $data->price = $request->price;
         $data->capacity = $request->capacity;
+        $data->water_source = $request->water_source;
         $data->status = $request->status;
         $data->image=$fullname;
 
@@ -173,8 +174,23 @@ class TankerController extends Controller
 
         
     }
+
+    
+
+
     public function ViewProduct($id){
         $data = Tanker::find($id);
-        return view('viewtanker',compact('data'));
+        $carousel=Carousel::all();
+        if($data)
+        {
+            $data->views=$data->views+1;
+           
+        }
+        $data->save();
+        if($data->save())
+        {
+        return view('viewtanker',compact('data','carousel'));
+        }
+       
     }
 }

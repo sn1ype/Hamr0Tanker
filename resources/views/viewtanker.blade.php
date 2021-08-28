@@ -67,8 +67,8 @@
   <dd><p>{{$data->desc}}</p></dd>
 </dl>
 <dl class="param param-feature">
-  <dt>Offers</dt>
-  <dd>NONE</dd>
+  <dt>Water source</dt>
+  <dd>{{$data->water_source}}</dd>
 </dl>  <!-- item-property-hor .// -->
 <dl class="param param-feature">
   <dt>Capacity</dt>

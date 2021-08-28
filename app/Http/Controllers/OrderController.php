@@ -194,6 +194,18 @@ class OrderController extends Controller
             
                     }
 
+                 public function OrderCanceled($id)
+                 {
+
+                    $data = Orders::find($id);
+                    if($data->delete()){
+                        return redirect('/admin/orders')->with('status', 'Order was deleted successfully');
+                    }
+                    else return redirect('/admin/orders')->with('status', 'There was an error');
+            
+
+                 }
+
     }
    
 

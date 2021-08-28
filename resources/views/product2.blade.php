@@ -36,7 +36,7 @@ $user = auth()->user();
 <body>
   <div style="max-width:100%">
   
-    <section style="max-width: 100%" class=" slider_section position-relative">
+    <section id="top" style="max-width: 100%" class=" slider_section position-relative">
       <div id="carouselExampleControls" class="carousel slide " data-ride="carousel">
         <div class="carousel-inner">
             
@@ -88,21 +88,21 @@ $user = auth()->user();
                   <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="about.html">About </a>
+                  <a class="nav-link" href="#aboutus">About </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="fruit.html">Our Fruit </a>
+                  <a class="nav-link" href="#tankers">Our Tankers </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/testimonial">Testimonial</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="contact.html">Contact Us</a>
+                  <a class="nav-link" href="#contactus">Contact Us</a>
                 </li>
                 @if(Auth::user())
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" data-target="#navItemGame"  id="navbarDropdown" role="button" data-toggle="dropdown" v-pre ><?php
-                    print($user->name);?> @if($user['verified']=='2')<img style='width: 25px;height:25px' title="Verified" src='{{asset("/images/badges/admin.png")}}'/>@endif
+                    print($user->name);?> @if($user['verified']=='2')<img style='width: 25px;height:25px' title="Verified User" src='{{asset("/images/badges/admin.png")}}'/>@endif
                   </a>
                 
                 <div id="#navItemGame" class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -127,8 +127,8 @@ $user = auth()->user();
       @if($user['role']=='2')
             <li class="nav-item">
               <a class="nav-link" href="/admin">
-                <i class="fa fa-user" style="color:red">
-                  {{-- <span class="badge badge-success">11</span> --}}
+                <i class="fa fa-lock" style="color:red">
+                  
                 </i>
                 Admin
               </a>
@@ -196,7 +196,7 @@ $user = auth()->user();
   <!-- about section -->
 
   
-  <section class="shop_section layout_padding">
+  <section id="tankers" class="shop_section layout_padding">
     <div class="container">
   <div class="box">
   <div class="detail-box">
@@ -238,7 +238,7 @@ $user = auth()->user();
           <br/>
           <br/>
           <br/>
-          <section class="about_section">
+          <section id="aboutus" class="about_section">
             <div class="container-fluid">
               <div class="row">
                 <div class="col-md-6 px-0">
@@ -348,7 +348,7 @@ $user = auth()->user();
 
 
   <!-- contact section -->
-  <section class="contact_section layout_padding-bottom">
+  <section id="contactus" class="contact_section layout_padding-bottom">
     <div class="container-fluid">
       <div class="row">
         <div class="offset-lg-2 col-md-10 offset-md-1">
@@ -486,7 +486,7 @@ $user = auth()->user();
   <section class="container-fluid footer_section ">
     <p>
       &copy; <span id="displayYear"></span> All Rights Reserved. Design by
-      <a href="https://www.snype.tk/">Aashish</a>
+      <a href="https://www.snype.tk/">Aashish</a><a style="float: right" href="#top"><button style="border: 0px;background:none;">Go To Top</button></a>
     </p>
   </section>
   <!-- footer section -->

@@ -25,6 +25,8 @@
                 <div class="item-desc">
                         <h2>{{$item->tanker_name}}</h2>
                         <h5>User : {{$item->user_name}}</h5>
+                        <h5>Capacity : {{$item->capacity}}L</h5>
+                        <h5>Price : Rs.{{$item->price}}</h5>
                         <h5>Payment Status : {{$item->payment}} on delivery</h5>
                         <h5>Deleviry Status : {{$item->status}}</h5>
                         <h5>Number : {{$item->number}}</h5>
@@ -32,20 +34,20 @@
                         <h5>Street : {{$item->street}}</h5>
                       
                 </div>
-             
+                <button class="btn btn-danger"><a style="text-decoration: none;color:black" href="/admin/orders/orderleft/{{$item->id}}"> Order Left</button></a><br><br>
+                <button class="btn btn-danger"><a style="text-decoration: none;color:black" href="/admin/orders/orderdelivered/{{$item->id}}">Order delivered</button></a><br><br>
+                <button class="btn btn-danger"><a style="text-decoration: none;color:black" href="/admin/orders/closeorder/{{$item->tanker_id}}">Close Order</button></a>
              </div>
              </div>
              
-             <div class="col-sm-3">
+             <div style="margin-bottom: 40px" class="col-sm-3">
                  
                 <div class="item-desc">
-                <div>
-                <button class="btn btn-danger"><a href="/admin/orders/orderleft/{{$item->id}}"> Order Left</button></a><br><br>
-                <button class="btn btn-danger"><a href="/admin/orders/orderdelivered/{{$item->id}}">Order delivered</button></a>
-                <button class="btn btn-danger"><a href="/admin/orders/closeorder/{{$item->tanker_id}}">Close Order</button></a>
-            </div>
+               
+               
+           
                 @if($item["status"]=="pending")
-                <form action="/ordercanceled/{{$item->id}}" method="POST">
+                <form action="/admin/orders/ordercanceled/{{$item->id}}" method="POST">
                         @csrf
                         @method('delete')
                 <button class="btn btn-danger">Cancel Order</button>

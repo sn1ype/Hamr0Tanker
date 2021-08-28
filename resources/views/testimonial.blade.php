@@ -90,21 +90,21 @@ $user = auth()->user();
                   <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="about.html">About </a>
+                  <a class="nav-link" href="#aboutus">About </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="fruit.html">Our Fruit </a>
+                  <a class="nav-link" href="#tankers">Our Tankers</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/testimonial">Testimonial</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="contact.html">Contact Us</a>
+                  <a class="nav-link" href="#contactus">Contact Us</a>
                 </li>
                 @if(Auth::user())
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" data-target="#navItemGame"  id="navbarDropdown" role="button" data-toggle="dropdown" v-pre ><?php
-                    print($user->name); ?> @if($user['verified']=='2')<img style='width: 25px;height:25px' title="Verified" src='{{asset("/images/badges/admin.png")}}'/>@endif
+                    print($user->name); ?> @if($user['verified']=='2')<img style='width: 25px;height:25px' title="Verified User" src='{{asset("/images/badges/admin.png")}}'/>@endif
                   </a>
                 
                 <div id="#navItemGame" class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -181,16 +181,17 @@ $user = auth()->user();
       </div>
   @endif
           <div class="container">
-    <form action="/testimony" method="POST" enctype='multipart/form-data'>
+    <form action="/product" method="POST" enctype='multipart/form-data'>
+      @csrf
       <div class="form-group">
-          @csrf
+         
         
         <label for="exampleInputEmail1">Name</label>
         <input type="text" class="form-control"   placeholder="Name" name="name" value="{{$user->name }}" readonly>
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Description</label>
-        <input type="text" class="form-control" placeholder="Enter Desc." name="desc">
+        <input type="text" class="form-control" placeholder="Enter Desc."  name="desc" required> 
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Subject</label>
@@ -205,7 +206,7 @@ $user = auth()->user();
         
       <button type="submit" class="btn btn-primary">Create Testimony</button>
     </form>
-    <form action="/admin/carousel">
+    <form action="/">
       <div style="margin-top:10px"><button type="submit" style="width: 128px" class="btn btn-danger text-white">Cancel</button></a></div>
     </div></form>
         </div>

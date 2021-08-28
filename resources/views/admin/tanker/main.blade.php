@@ -21,6 +21,7 @@
     <th style="width: 40px;">Name</th>
     <th style="width: 40px;">Price</th>
     <th style="width: 40px;">Capacity</th>
+    <th style="width: 40px;">Water Source</th>
     <th style="width: 40px;">Image</th>
     <th colspan="3">Actions</th>
 </tr>
@@ -31,6 +32,7 @@
        
         <td style="width: 40px;">{{$post->price  }}</td>
         <td style="width: 40px;">{{$post->capacity}}</td>
+        <td style="width: 40px;">{{$post->water_source}}</td>
         <td style="width: 40px;">{{$post->image}}</td>
         <td style="width: 40px;"><a href="/post/{{$post->id}}/edit"><button class="btn btn-info">Edit</button></a></td>
         <form method="POST" action="/post/{{$post->id}}">

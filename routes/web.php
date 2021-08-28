@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Usercontroller;
 use App\Http\Controllers\TankerController;
-use App\Http\Controllers\WaterController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CarouselController;
 Use App\Http\Controllers\FrontEndController;
@@ -42,7 +41,7 @@ Route::namespace('App\Http\Controllers')->group(function ()
       Route::post('/myorders/{tanker_id}','OrderController@store');
       Route::delete('/cancelorder/{id}','OrderController@destroy');
       Route::get('/testimonial','TestimonyController@createsecond');
-      Route::post('/testimony','TestimonyController@storesecond');
+      Route::post('/product','TestimonyController@storesecond');
       
       
     
@@ -86,6 +85,7 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],function (){
         Route::get('/orderleft/{id}',[OrderController::class, 'ChangeOrderStatus']);
         Route::get('/orderdelivered/{id}',[OrderController::class, 'OrderDelivered']);
         Route::get('/closeorder/{tanker_id}',[OrderController::class, 'OrderClosed']);
+        Route::delete('/ordercanceled/{id}',[OrderController::class, 'OrderCanceled']);
         
     
     });

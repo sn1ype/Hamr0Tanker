@@ -1,3 +1,7 @@
+@php
+    $user=auth()->user();
+@endphp
+
 @extends('admin.dashboard')
 @section('content')
     
@@ -42,6 +46,7 @@
           <label for="exampleInputPassword1">Email</label>
           <input type="email" class="form-control" id="exampleInputPassword1"  name="email" value="{{$data->email}}">
         </div>
+        @if($user['email']=='snype@myktm.ml')
         <div class="form-group">
             <label for="exampleInputPassword1">Role</label>
             <div class="form-check">
@@ -57,7 +62,7 @@
                 </label>
               </div>
           </div>
-
+@endif
           <div class="form-group">
             <label for="exampleInputPassword1">Verification</label>
             <div class="form-check">

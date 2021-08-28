@@ -160,7 +160,7 @@ $carousel=Carousel::all();
                 @if(Auth::user())
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" data-target="#navItemGame"  id="navbarDropdown" role="button" data-toggle="dropdown" v-pre ><?php
-                    print($user->name); ?> @if($user['verified']=='2')<img style='width: 25px;height:25px' title="Verified" src='{{asset("/images/badges/admin.png")}}'/>@endif
+                    print($user->name); ?> @if($user['verified']=='2')<img style='width: 25px;height:25px' title="Verified User" src='{{asset("/images/badges/admin.png")}}'/>@endif
                   </a>
                 
                 <div id="#navItemGame" class="dropdown-menu" aria-labelledby="navbarDropdown">

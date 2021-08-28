@@ -111,7 +111,7 @@ class TestimonyController extends Controller
             $data->save();
 
         if($data->save()){
-            //Redirect with Flash message
+            
             return redirect('/')->with('status', 'Testimony added Successfully!');
         }
         else{

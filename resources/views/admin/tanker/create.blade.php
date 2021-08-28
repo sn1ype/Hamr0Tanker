@@ -36,6 +36,10 @@
             <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Enter Tanker Capacity" name="capacity" required>
           </div><br>
           <div class="form-group">
+            <label for="exampleInputPassword1">Capacity</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Water Source" name="water_source" required>
+          </div><br>
+          <div class="form-group">
             <label for="exampleInputPassword1">Image</label>
             <input type="file" class="form-control"   name="image">
           </div><br>

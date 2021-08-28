@@ -34,6 +34,10 @@
             <input type="number" class="form-control" id="exampleInputPassword1"  name="capacity" value="{{$data->capacity}}">
           </div><br>
           <div class="form-group">
+            <label for="exampleInputPassword1">Capacity</label>
+            <input type="text" class="form-control" id="exampleInputPassword1"  name="water_source" value="{{$data->water_source}}">
+          </div><br>
+          <div class="form-group">
             <label for="exampleInputPassword1">Status</label>
             <input type="text" class="form-control" id="exampleInputPassword1"  name="status" value="{{$data->status}}">
           </div><br>

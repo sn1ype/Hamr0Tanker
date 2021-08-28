@@ -1,3 +1,12 @@
+@php
+    use App\Models\Orders;
+    
+    $wordlist = Orders::where('status','=','pending')->get();
+$wordCount = $wordlist->count();
+
+@endphp
+
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -116,7 +125,7 @@
                         <li class="sidebar-item pt-2">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/userstable"
                                 aria-expanded="false">
-                                <i class="far fa-clock" aria-hidden="true"></i>
+                                <i class="fa fa-user-circle" aria-hidden="true"></i>
                                 <span class="hide-menu">Users</span>
                             </a>
                         </li>
@@ -131,7 +140,7 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/carousel"
                                 aria-expanded="false">
-                                <i class="fa fa-columns" aria-hidden="true"></i>
+                                <i class="fa fa-bookmark" aria-hidden="true"></i>
                                 <span class="hide-menu">Carousel</span>
                             </a>
                         </li>
@@ -139,29 +148,29 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/tanker"
                                 aria-expanded="false">
-                                <i class="fa fa-columns" aria-hidden="true"></i>
-                                <span class="hide-menu">Tanker</span>
+                                <i class="fa fa-bus" aria-hidden="true"></i>
+                                <span class="hide-menu">Tankers</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/orders"
                                 aria-expanded="false">
-                                <i class="fa fa-columns" aria-hidden="true"></i>
-                                <span class="hide-menu">Active Orders</span>
+                                <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                <span class="hide-menu">Active Orders = <span>{{$wordCount}}</span> </span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/orders/ordersarchive"
                                 aria-expanded="false">
-                                <i class="fa fa-columns" aria-hidden="true"></i>
+                                <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
                                 <span class="hide-menu">Closed Orders</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/admin/testimony"
                                 aria-expanded="false">
-                                <i class="fa fa-columns" aria-hidden="true"></i>
+                                <i class="fa fa-comment" aria-hidden="true"></i>
                                 <span class="hide-menu">Testimony</span>
                             </a>
                         </li>
@@ -198,15 +207,8 @@
             </div>
 
             
-            @yield('content');
+            @yield('content')
          
-
-
-            
-
-
-
-            
 
             <div class="container-fluid">
           
