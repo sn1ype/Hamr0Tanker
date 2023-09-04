@@ -155,64 +155,56 @@ $user = auth()->user();
   <section class="shop_section layout_padding">
 
   <div class="container-fluid col-md-6">
-    <div class="row ">
+    <!-- resources/views/tankers/index.blade.php -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Similar Tankers</title>
+</head>
+<body>
+    <h1>Similar Tankers for '{{ $queryTankerName }}'</h1>
+    <div class="container-fluid col-md-6">
+        <div class="row ">
+    @if(count($similarities) > 0)
+        <ul>
+            @foreach($similarities as $similarity)
+                <li>
+                    {{ $similarity['tanker']->name }},  {{ $similarity['tanker']->price }}   (Similarity: {{ $similarity['similarity'] }}, Match %: {{ $similarity['matchPercentage'] }}%)
+                    <!-- You can access other attributes of the Tanker model as well -->
+                    <!-- For example: $similarity['tanker']->attribute_name -->
+                </li>
 
-    <div style="margin-bottom: 30px" class="col-md-5">
-        <a style="text-decoration: none;color:grey" href="/tanker/{{$product->id}}">
-          <div class="fruit_container">
-            <div class="box">
-              <img style="height:250px;width:100%;padding-bottom:20px" src="{{asset('/images/tanker/'.$product["image"])}}" alt="">
-              <div>
-                <h5>
-                Name   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  {{$product->name}}
-                </h5>
-                <h5>
-                    Capacity : {{$product->capacity}}L
-                   </h5>
-                   <h5>
-                   Price &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Rs.{{$product->price}}
-                   </h5>
-              </div>
-            </div>
-          </div>
-                </a>
-            </div>
+                    <div style="margin-bottom: 30px" class="col-md-10">
+                        <a style="text-decoration: none;color:grey" href="/tanker/{{ $similarity['tanker']->id}}">
+                          <div class="fruit_container">
+                            <div class="box">
+                              <img style="height:250px;width:100%;padding-bottom:20px" src="{{asset('/images/tanker/'. $similarity['tanker']->image)}}" alt="">
+                              <div>
+                                <h5>
+                                Name   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  {{ $similarity['tanker']->name}}
+                                </h5>
+                                <h5>
+                                    Capacity : {{ $similarity['tanker']->capacity}}L
+                                   </h5>
+                                   <h5>
+                                   Price &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : Rs.{{ $similarity['tanker']->price}}
+                                   </h5>
+                              </div>
+                            </div>
+                          </div>
+                                </a>
+                            </div>
+            @endforeach
+                        </div>
+                        </div>
 
-            <div style="margin-bottom: 30px" class="col-md-5">
+        </ul>
+    @else
+        <p>No similar tankers found.</p>
+    @endif
+</body>
+</html>
 
-                  <div class="fruit_container">
-                    <div class="box">
-
-                      <div>
-                        <h5>
-                            Name   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  {{$product->name}}
-                        </h5>
-                        <h5>
-                            Price   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  {{$product->price}}
-                        </h5>
-                        <h5>
-                            Desc   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  {{$product->desc}}
-                        </h5>
-                        <h5>
-                            Capacity   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  {{$product->capacity}}
-                        </h5>
-                        <h5>
-                            water Source   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  {{$product->water_source}}
-                        </h5>
-                        <h5>
-                            <a href="/order/{{$product->id}}">
-                                Order Now
-                            </a>
-                        </h5>
-                      </div>
-                    </div>
-                  </div>
-
-                    </div>
-
-
-
-    </div>
           </div>
   </section>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Tanker;
 use App\Models\Carousel;
+use App\Models\Testimony;
 
 class TankerController extends Controller
 {
@@ -29,7 +30,7 @@ class TankerController extends Controller
     {
         //CREATE
         return view('admin.tanker.create');
-        
+
     }
 
     /**
@@ -48,9 +49,9 @@ class TankerController extends Controller
             'price' => 'required',
             'capacity' => 'required',
             'water_source' => 'required'
-            
+
         ]);
-        
+
         if ($file = $request->file('image')) {
             $request->validate([
                 'image' =>'mimes:jpg,jpeg,png,bmp'
@@ -60,11 +61,11 @@ class TankerController extends Controller
             $fullname = time().".".$imgExt;
             $result = $image->storeAs('images/tanker',$fullname);
             }
-    
+
             else{
                 $fullname = 'image.png';
             }
-            
+
             $data = new Tanker();
             $data->name = $request->name;
             $data->desc = $request->desc;
@@ -108,7 +109,7 @@ class TankerController extends Controller
     public function edit($id)
     {
         //Update View
-        
+
         $data = Tanker::where('id',$id)->first();
         return view('admin.tanker.edit',compact('data'));
     }
@@ -132,7 +133,7 @@ class TankerController extends Controller
             $fullname = time().".".$imgExt;
             $result = $image->storeAs('images/tanker',$fullname);
             }
-    
+
             else{
                 $fullname = $data->image;
             }
@@ -172,25 +173,84 @@ class TankerController extends Controller
         }
         else return redirect('/admin/tanker')->with('status', 'There was an error');
 
-        
+
     }
 
-    
+
 
 
     public function ViewProduct($id){
-        $data = Tanker::find($id);
+        $product = Tanker::find($id);
+        $testimony = Testimony::all();
         $carousel=Carousel::all();
-        if($data)
+        if($product)
         {
-            $data->views=$data->views+1;
-           
+            $product->views=$product->views+1;
+
         }
-        $data->save();
-        if($data->save())
+        $product->save();
+        if($product->save())
         {
-        return view('viewtanker',compact('data','carousel'));
+        return view('viewtanker',compact('product','carousel','testimony'));
         }
-       
+
     }
+
+
+    public function showSimilarTankers(Request $request)
+    {
+        $carousel = Carousel::all();
+        $queryTankerName = $request->input('query');
+        $queryTokens = $this->tokenizeName($queryTankerName);
+
+        // Assuming you have a Tanker model and a 'name' column in the database
+        $allTankers = \App\Models\Tanker::all();
+
+        $similarities = [];
+        foreach ($allTankers as $tanker) {
+            $nameTokens = $this->tokenizeName($tanker->name);
+            $similarity = $this->cosineSimilarity($queryTokens, $nameTokens);
+            $matchPercentage = round($similarity * 100, 2); // Calculate match percentage
+
+            if($matchPercentage >= 50) {
+            $similarities[] = [
+                'tanker' => $tanker, // Use 'tanker' instead of 'name'
+                'similarity' => $similarity,
+                'matchPercentage' => $matchPercentage,
+            ];
+        }
+
+        }
+
+        // Sort by similarity in descending order
+        usort($similarities, function ($a, $b) {
+            return $b['similarity'] - $a['similarity'];
+        });
+
+        return view('simillartankerresult', compact('queryTankerName', 'similarities', 'carousel'));
+    }
+
+
+
+    private function tokenizeName($name)
+    {
+        return explode(' ', strtolower($name));
+    }
+
+    private function cosineSimilarity($vectorA, $vectorB)
+{
+    // dd($vectorA);
+    $intersection = array_intersect($vectorA, $vectorB);
+    $dotProduct = count($intersection);
+    $normA = count($vectorA);
+    $normB = count($vectorB);
+
+    if ($normA == 0 || $normB == 0) {
+        return 0;
+    }
+
+    return $dotProduct / sqrt($normA * $normB);
 }
+
+}
+

@@ -31,6 +31,8 @@ $user = auth()->user();
   <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
   <!-- responsive style -->
   <link href="{{ asset('css/responsive.css') }}" rel="stylesheet" />
+  <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
+
 </head>
 
 <body>
@@ -178,38 +180,113 @@ $user = auth()->user();
                 </a>
             </div>
 
-            <div style="margin-bottom: 30px" class="col-md-5">
-
-                  <div class="fruit_container">
-                    <div class="box">
-
-                      <div>
-                        <h5>
-                            Name   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  {{$product->name}}
-                        </h5>
-                        <h5>
-                            Price   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  {{$product->price}}
-                        </h5>
-                        <h5>
-                            Desc   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  {{$product->desc}}
-                        </h5>
-                        <h5>
-                            Capacity   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  {{$product->capacity}}
-                        </h5>
-                        <h5>
-                            water Source   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:  {{$product->water_source}}
-                        </h5>
-                        <h5>
-                            <a href="/order/{{$product->id}}">
-                                Order Now
-                            </a>
-                        </h5>
-                      </div>
-                    </div>
+            <div class="container">
+                <form action="/myorders/{tanker_id}" method="POST">
+                  @csrf
+                  <div class="form-group">
+                    <label for="pwd">User's Name : {{$user->name}} @if($user['verified']=='2')<img style='width: 20px;height:20px' title="Verified" src='{{asset("/images/badges/admin.png")}}'/>@endif</label>
+                  <input type="text" name="user_name" value="{{$user->name}}" id="" hidden>
                   </div>
-
+                    <div class="form-group">
+                      <label for="email">Tanker Capacity : </label>
+                      <input type="text" name="capacity" value="{{$product->capacity}}" readonly>
                     </div>
+                    <div class="form-group">
+                      <label for="pwd">Tanker Price :</label>
+                      <input type="text" name="price" value="{{$product->price}}" readonly>
+                    </div>
+                      <div class="form-group">
+                        <label for="pwd">Address</label><span> <i>only available inside valley right now </i></span>
+                        <input type="text"  class="form-control" name="address" id="pwd" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="pwd">Street</label>
+                        <input type="text"  class="form-control" name="street" id="pwd" required>
+                      </div>
+                      <div class="form-group">
+                        <label for="pwd">Phone Number</label>
+                        <input type="number"  class="form-control" name="number" maxlength="10" minlength="10" id="pwd" required>
+                      </div>
+                      <div class="form-group">
+                        <input type="text"  class="form-control" name="status" value="pending" id="pwd" hidden>
+                      </div>
 
+
+                    <div class="checkbox">
+
+                      <label><input name="payment" value="payment" type="radio" checked> Cash on delivery </label>
+                    </div>
+                    <input type="text" name="tanker_id" value="{{$product->id}}" id="" hidden>
+                    <input type="text" name="tanker_name" value="{{$product->name}}" id="" hidden>
+                    <input type="text" name="user_id" value="{{$product->id}}" id="" hidden>
+
+                  </form>
+
+                  <div class="card-header">
+                    Payment via <br>
+                    <a  style="border: 0px; visited:none" id="payment-button"><img style="width:90px; height:37px;" src="{{ URL::asset('images/logo/khalti-logo.png')}}"></button>
+                  {{-- <a href="/purchase-meter/{{$data3->id}}"><button class="btn btn-success">Pay with esewa</button></a> --}}
+                  </div>
+              </div>
+
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+                       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                       <script>
+                        var config = {
+                            // replace the publicKey with yours
+                            "publicKey": "{{ config('app.khalti_public_key') }}",
+                            "productIdentity": "{{$product->id}}",
+                            "productName": "{{$product->name}}",
+                            "productUrl": "http://127.0.0.1:8000/tanker/{{$product->id}}",
+                            "paymentPreference": [
+                                "KHALTI",
+                                "EBANKING",
+                                "MOBILE_BANKING",
+                                "CONNECT_IPS",
+                                "SCT",
+                                ],
+                            "eventHandler": {
+
+                                onSuccess (payload) {
+                                    // hit merchant api for initiating verfication
+                                    $.ajax({
+                                        type : 'POST',
+                                        url : "{{ route('khalti.verifyPayment') }}",
+                                        data: {
+                                            token : payload.token,
+                                            amount : payload.amount,
+                                            "_token" : "{{ csrf_token() }}"
+                                        },
+                                        success: function(res => json){
+                                          console.log('payment successful');
+                                          console.log(res);
+                                          alert('Payment successful');
+                                          window.location.href= "/tanker/{{$product->id}}";
+                                         },
+
+                                    });
+                                    console.log(payload);
+                                },
+                                onError (error) {
+                                    console.log(error);
+                                    alert('Payment error');
+                                },
+                                onClose () {
+                                    console.log('widget is closing');
+                                }
+                            }
+                        };
+
+                        var checkout = new KhaltiCheckout(config);
+                        var btn = document.getElementById("payment-button");
+                        btn.onclick = function () {
+                            // minimum transaction amount must be 10, i.e 1000 in paisa.
+                            checkout.show({amount: 1000});
+                        }
+                    </script>
+
+                          </div>
+                </div>
 
 
     </div>

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carousel;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Orders;
 use App\Models\Tanker;
 use Auth;
-
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class OrderController extends Controller
 {
@@ -21,27 +22,28 @@ class OrderController extends Controller
                 return redirect("/confirmorder/$id");
             }
 
-            
+
         }
         public function ConfirmOrder($id)
         {
-            $data = Tanker::find($id);
+            $carousel = Carousel::all();
+            $product = Tanker::find($id);
             $user = Auth::user();
-            return view ("ordertanker",compact("data","user"));
+            return view ("confirmtanker",compact("product","user",'carousel'));
         }
 
         public function ChangeStatus($id,$status)
         {
-               
+
                 //Update
                 $data = Tanker::find($id);
                 $data->status=$status;
-               
-              
-        
+
+
+
                 $data->save();
-                   
-    
+
+
             }
 
         public function store(Request $request)
@@ -49,7 +51,7 @@ class OrderController extends Controller
             //CREATE
             // dd($request->all());
 
-            
+
             $request->validate([
                 'user_name' => 'required',
                 'tanker_id' => 'required',
@@ -61,8 +63,8 @@ class OrderController extends Controller
                 'number' => 'required',
                 'price' => 'required',
                 'payment' => 'required',
-               
-                
+
+
             ]);
 
             $data = new Orders();
@@ -80,9 +82,9 @@ class OrderController extends Controller
 
 
             if($data->save()){
-                  
+
                 $this->ChangeStatus($request->tanker_id,"Booked");
-                
+
                 //Redirect with Flash message
                 return redirect('/myorders')->with('status', 'Order placed Successfully!');
             }
@@ -90,20 +92,20 @@ class OrderController extends Controller
                 return redirect('/myorders')->with('status', 'There was an error!');
             }
 
-        
+
                 //Update View
-                
+
                 $data = Tanker::where('id',$id);
                 return view('admin.tanker.edit',compact('data'));
-        
+
 
         }
-        
-      
-        
 
-           
-           
+
+
+
+
+
             public function destroy($id)
             {
                 //Delete
@@ -112,12 +114,12 @@ class OrderController extends Controller
                     return redirect('/myorders')->with('status', 'Order was deleted successfully');
                 }
                 else return redirect('/myorders')->with('status', 'There was an error');
-        
-                
+
+
             }
         public function Orders()
         {
-           
+
             $orders= Orders::where('status','<>','delivered' )->get();
                 return view('admin.manageorder.orders',compact('orders'));
         }
@@ -133,10 +135,10 @@ class OrderController extends Controller
 
         public function ChangeOrderStatus($id)
         {
-               
+
                 //Update
                 $data = Orders::find($id);
-              
+
                if($data)
                {
                    $data->status='confirmed';
@@ -146,19 +148,19 @@ class OrderController extends Controller
                {
                 return redirect('/admin/orders')->with('status', 'Order Confirmed Successfully!');
                }
-              
-               
-                   
-    
+
+
+
+
             }
 
 
             public function OrderDelivered($id)
             {
-                   
+
                     //Update
                     $data = Orders::find($id);
-                  
+
                    if($data)
                    {
                        $data->status='delivered';
@@ -168,17 +170,17 @@ class OrderController extends Controller
                    {
                     return redirect('/admin/orders')->with('status', 'Order Delivered Successfully!');
                    }
-                  
-                   
-                       
-        
+
+
+
+
                 }
                 public function OrderClosed($id)
                 {
-                       
+
                         //Update
                         $data = Tanker::find($id);
-                      
+
                        if($data)
                        {
                            $data->status='available';
@@ -188,10 +190,10 @@ class OrderController extends Controller
                        {
                         return redirect('/admin/orders/ordersarchive')->with('status', 'Order closed Successfully!');
                        }
-                      
-                       
-                           
-            
+
+
+
+
                     }
 
                  public function OrderCanceled($id)
@@ -202,13 +204,13 @@ class OrderController extends Controller
                         return redirect('/admin/orders')->with('status', 'Order was deleted successfully');
                     }
                     else return redirect('/admin/orders')->with('status', 'There was an error');
-            
+
 
                  }
 
     }
-   
 
-    
+
+
 
 

@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Orders;
 use App\Models\Testimony;
 use Auth;
+use Illuminate\Support\Carbon;
 
 class FrontendController extends Controller
 {
@@ -20,24 +21,24 @@ class FrontendController extends Controller
         $tanker= Tanker::where('status','=','Booked')->get();
         $count=Tanker::where('status','booked')->count();
         $testimony=Testimony::where('status','=','confirmed')->get();
-       
-               
+
+
         return view('product2',compact('carousel','products','tanker','testimony','count'));
     }
-    
+
     public function dashboard()
     {
         //Read
-    
-        
+
+
         return view('admin.dashboard');
-       
+
     }
     public function profile()
     {
         //Read
-       
-       
+
+
         return view('admin.profile');
     }
 
@@ -45,7 +46,7 @@ class FrontendController extends Controller
     {
         //Read
        $users=User::all();
-       
+
         return view('admin.userstable',compact('users'));
     }
 
@@ -53,7 +54,7 @@ class FrontendController extends Controller
     {
         //Read
        $carousel=Carousel::all();
-       
+
         return view('admin.carousel',compact('carousel'));
     }
 
@@ -61,29 +62,31 @@ class FrontendController extends Controller
     {
         //Read
        $tankers=Tanker::all();
-       
+
         return view('admin.tanker',compact('tankers'));
     }
 
     public function User()
     {
-        
-       
-        return view('user');
+        $carousel = Carousel::all();
+
+        return view('user',[
+            'carousel' => $carousel,
+        ]);
     }
     public function Error()
     {
         //Read
-       
-       
+
+
         return view('errors.error');
     }
     public function MyOrder()
     {
         $user = Auth::id();
         $orders = Orders::where('user_id', $user)->get();
-       
-       
+
+
         return view('myorders',compact('orders'));
     }
 }

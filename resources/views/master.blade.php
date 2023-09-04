@@ -17,7 +17,7 @@
     @yield("content");
     <div></div>
     <div style="height: 100px">{{View::make('footer')}}</div>
-    
+
 </body>
 <style>
     @import url('https://fonts.googleapis.com/css?family=Open+Sans');
@@ -61,7 +61,7 @@ body {
 
 #ads {
     margin: 30px 0 30px 0;
-   
+
 }
 
 #ads .card-notify-badge {
@@ -70,7 +70,7 @@ body {
         top: -20px;
         background: #ff8600;
         text-align: center;
-        border-radius: 30px 30px 30px 30px; 
+        border-radius: 30px 30px 30px 30px;
         color: white;
         padding: 5px 10px;
         font-size: 14px;
@@ -84,24 +84,24 @@ body {
         background: #ff4444;
         border-radius: 50%;
         text-align: center;
-        color: #fff;      
-        font-size: 14px;      
+        color: #fff;
+        font-size: 14px;
         width: 50px;
-        height: 50px;    
+        height: 50px;
         padding: 15px 0 0 0;
 }
 
 
-#ads .card-detail-badge {      
+#ads .card-detail-badge {
         background: ;
         text-align: center;
         border-radius: 30px 30px 30px 30px;
         color: #000;
         padding: 5px 10px;
-        font-size: 24px;        
+        font-size: 24px;
     }
 
-   
+
 
 #ads .card:hover {
             background: #fff;
@@ -112,12 +112,12 @@ body {
 
 #ads .card-image-overlay {
         font-size: 20px;
-        
+
     }
 
 
 #ads .card-image-overlay span {
-            display: inline-block;              
+            display: inline-block;
         }
 
 
@@ -134,7 +134,7 @@ body {
         text-decoration: none;
         margin: 20px auto 1px auto;
         color: #000;
-        overflow: hidden;        
+        overflow: hidden;
         position: relative;
         background-color: #e6de08;
     }
@@ -178,7 +178,7 @@ body {
     .trending-item{
         float: left;
         width: 20%;
-       
+
     }
     a.trending-item{
         text-decoration: none;
@@ -198,7 +198,7 @@ body {
     }
     .searched-item
     {
-        
+
     }
     .item-desc{
         margin-bottom: 50px;

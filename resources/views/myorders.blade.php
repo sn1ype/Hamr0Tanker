@@ -1,59 +1,3 @@
-{{-- 
-
-@extends('master')
-@section('content')
-
-<div style="height: 900px" class="containeer">
-
-    <div class="custom-product">
-        <div class="col-sm-10">
-         <div class="trending-wrapper">
-             <h4>My Orders</h4><br>
-             @foreach ($orders as $item)
-             <div class="row searched-item cart-list-divider">
-             <div class="col-sm-3">
-                
-                     <img class="trending-image" src="{{asset('/images/tanker/'.$item['image'])}}">
-     
-              
-             </div>
-             <div class="col-sm-4">
-                 
-                <div class="item-desc">
-                        <h2>{{$item->tanker_name}}</h2>
-                        <h5>User : {{$item->user_name}}</h5>
-                        <h5>Payment Status : {{$item->payment}} on delivery</h5>
-                        <h5>Status : {{$item->status}}</h5>
-                      
-                </div>
-             
-             </div>
-             <div class="col-sm-3">
-                @if($item["status"]=="pending")
-                <div class="item-desc">
-                       
-                        <form action="/cancelorder/{{$item->id}}" method="POST">
-                                @csrf
-                                @method('delete')
-                        <button class="btn btn-danger">Cancel Order</button>
-                </form>
-                </div>@endif
-                
-             </div>
-       </div>
-      @endforeach
-     </div>
-        </div>
-     </div>
-
-
-</div>
-
-
-@endsection --}}
-
-
-
 
 <?php
 use App\Models\Carousel;
@@ -93,11 +37,11 @@ $carousel=Carousel::all();
 
 <body>
   <div style="max-width:100%">
-  
+
     <section style="max-width: 100%" class=" slider_section position-relative">
       <div id="carouselExampleControls" class="carousel slide " data-ride="carousel">
         <div class="carousel-inner">
-            
+
           <div  class="carousel-item active">
             <div style="height:270px;width:100%" class="img-box">
               <img style="width: 100%;height:100%" src="{{asset('images/carousel/banner.jpg')}}" alt="">
@@ -105,7 +49,7 @@ $carousel=Carousel::all();
           </div>
           @foreach ($carousel as $item)
           <div class="carousel-item">
-           
+
             <div class="carousel-caption d-none d-md-block slider-text">
                 <h3 class="display-4">{{$item->name}}</h3>
                 <p class="lead">{{$item->desc}}</p>
@@ -116,15 +60,15 @@ $carousel=Carousel::all();
           </div>
           @endforeach
         </div>
-       
+
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
           <span class="sr-only">Previous</span>
         </a>
         <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
           <span class="sr-only">Next</span>
         </a>
-        
-      </div> 
+
+      </div>
     </section>
 
   </div>
@@ -162,7 +106,7 @@ $carousel=Carousel::all();
                   <a class="nav-link dropdown-toggle" data-target="#navItemGame"  id="navbarDropdown" role="button" data-toggle="dropdown" v-pre ><?php
                     print($user->name); ?> @if($user['verified']=='2')<img style='width: 25px;height:25px' title="Verified User" src='{{asset("/images/badges/admin.png")}}'/>@endif
                   </a>
-                
+
                 <div id="#navItemGame" class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a id="#navItemGame" class="dropdown-item" href="/myorders">My Orders</a>
                     <a id="#navItemGame" class="dropdown-item" href="/user">Profile</a>
@@ -173,7 +117,7 @@ $carousel=Carousel::all();
                   <li class="nav-item">
                     <a class="nav-link" href="/login">
                       <i class="fa fa-user" style="color:green">
-                       
+
                       </i>
                       Login
                     </a>
@@ -193,7 +137,7 @@ $carousel=Carousel::all();
             </li>
             @else
                 <span></span>
-            
+
             @endif
             @endif
               </ul>
@@ -207,9 +151,9 @@ $carousel=Carousel::all();
     </div>
   </section>
 
- 
 
-  
+
+
   <section class="shop_section layout_padding">
     <div class="container">
   <div class="box">
@@ -226,8 +170,8 @@ $carousel=Carousel::all();
   <div class="container-fluid">
     <div class="row">
         @foreach ($orders as $item)
-    <div style="margin-bottom: 30px" class="col-md-3"> 
-        
+    <div style="margin-bottom: 30px" class="col-md-3">
+
           <div class="fruit_container">
             <div class="box">
               <img style="height:250px;width:100%;padding-bottom:20px" src="{{asset('/images/orders/order.jpg')}}" alt="">
@@ -249,33 +193,33 @@ $carousel=Carousel::all();
           </div class="btn-box">
           @if($item["status"]=="pending")
                 <div class="item-desc">
-                       
+
                         <form action="/cancelorder/{{$item->id}}" method="POST">
                                 @csrf
                                 @method('delete')
                         <button class="btn btn-danger">Cancel Order</button>
                 </form>
                 </div>@endif
-                
+
             </div>
             @endforeach
-           
+
     </div>
           </div>
           <br/>
           <br/>
           <br/>
-         
-      
+
+
 
   <!-- client section -->
 
-  
+
   <!-- end client section -->
 
 
   <!-- contact section -->
-  
+
 
   <!-- info section -->
 
@@ -372,4 +316,4 @@ $carousel=Carousel::all();
 
 </body>
 
-</html>
+</html> --}}

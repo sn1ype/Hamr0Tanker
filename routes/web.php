@@ -6,6 +6,7 @@ use App\Http\Controllers\TankerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CarouselController;
 Use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\PaymentController;
 Use App\Http\Controllers\TestimonyController;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,9 +26,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::namespace('App\Http\Controllers')->group(function () 
+Route::namespace('App\Http\Controllers')->group(function ()
 {
-   
+
 
     Route::get('/','FrontendController@index');
       Route::get('/user','FrontendController@User');
@@ -42,16 +43,21 @@ Route::namespace('App\Http\Controllers')->group(function ()
       Route::delete('/cancelorder/{id}','OrderController@destroy');
       Route::get('/testimonial','TestimonyController@createsecond');
       Route::post('/product','TestimonyController@storesecond');
-      
-      
-    
+      Route::post('/khalti/payment/verify',[PaymentController::class,'verifyPayment'])->name('khalti.verifyPayment')->middleware('verified');
+      Route::post('/khalti/payment/verify/cleardue',[PaymentController::class,'verifyPaymentForDue'])->name('khalti.verifyPaymentForDue')->middleware('verified');
+      Route::post('/khalti/payment/store',[PaymentController::class,'storePayment'])->name('khalti.storePayment')->middleware('verified');
+      Route::get('/request-now/thankyou',[PaymentController::class,'thankyou'])->name('khalti.success')->middleware('verified');
+      Route::get('/tankers/similar', [TankerController::class, 'showSimilarTankers'])->name('tankers.similar');
+
+
+
 });
 
 
 Route::group(['prefix'=>'admin','middleware'=>'admin'],function (){
-    Route::get('/',[FrontendController::class, 'dashboard']);
+    Route::get('/',[App\Http\Controllers\FrontendController::class, 'dashboard']);
     Route::group(['prefix'=>'carousel','middleware'=>'auth'],function (){
-        
+
         Route::get('/',[CarouselController::class, 'index']);
         Route::get('/create',[CarouselController::class, 'create']);
         Route::post('/',[CarouselController::class, 'store']);
@@ -86,8 +92,8 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'],function (){
         Route::get('/orderdelivered/{id}',[OrderController::class, 'OrderDelivered']);
         Route::get('/closeorder/{tanker_id}',[OrderController::class, 'OrderClosed']);
         Route::delete('/ordercanceled/{id}',[OrderController::class, 'OrderCanceled']);
-        
-    
+
+
     });
     Route::group(['prefix'=>'testimony','middleware'=>'auth'],function (){
         Route::get('/',[TestimonyController::class, 'index']);

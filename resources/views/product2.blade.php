@@ -35,11 +35,11 @@ $user = auth()->user();
 
 <body>
   <div style="max-width:100%">
-  
+
     <section id="top" style="max-width: 100%" class=" slider_section position-relative">
       <div id="carouselExampleControls" class="carousel slide " data-ride="carousel">
         <div class="carousel-inner">
-            
+
           <div  class="carousel-item active">
             <div style="height:270px;width:100%" class="img-box">
               <img style="width: 100%;height:100%" src="{{asset('images/carousel/banner.jpg')}}" alt="">
@@ -47,7 +47,7 @@ $user = auth()->user();
           </div>
           @foreach ($carousel as $item)
           <div class="carousel-item">
-            
+
             <div class="carousel-caption d-none d-md-block slider-text">
                 <h3 class="display-4">{{$item->name}}</h3>
                 <p class="lead">{{$item->desc}}</p>
@@ -58,15 +58,15 @@ $user = auth()->user();
           </div>
           @endforeach
         </div>
-       
+
         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
           <span class="sr-only">Previous</span>
         </a>
         <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
           <span class="sr-only">Next</span>
         </a>
-        
-      </div> 
+
+      </div>
     </section>
 
   </div>
@@ -104,7 +104,7 @@ $user = auth()->user();
                   <a class="nav-link dropdown-toggle" data-target="#navItemGame"  id="navbarDropdown" role="button" data-toggle="dropdown" v-pre ><?php
                     print($user->name);?> @if($user['verified']=='2')<img style='width: 25px;height:25px' title="Verified User" src='{{asset("/images/badges/admin.png")}}'/>@endif
                   </a>
-                
+
                 <div id="#navItemGame" class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a id="#navItemGame" class="dropdown-item" href="/myorders">My Orders</a>
                     <a id="#navItemGame" class="dropdown-item" href="/user">Profile</a>
@@ -115,7 +115,7 @@ $user = auth()->user();
                   <li class="nav-item">
                     <a class="nav-link" href="/login">
                       <i class="fa fa-user" style="color:green">
-                       
+
                       </i>
                       Login
                     </a>
@@ -128,14 +128,14 @@ $user = auth()->user();
             <li class="nav-item">
               <a class="nav-link" href="/admin">
                 <i class="fa fa-lock" style="color:red">
-                  
+
                 </i>
                 Admin
               </a>
             </li>
             @else
                 <span></span>
-            
+
             @endif
             @endif
               </ul>
@@ -152,9 +152,9 @@ $user = auth()->user();
   <!-- end nav section -->
 
   <!-- shop s@ection -->
- 
-      
- 
+
+
+
 @if($count!=0)
 
   <section class="shop_section layout_padding">
@@ -162,7 +162,7 @@ $user = auth()->user();
       <div class="box">
         <div class="detail-box">
           <h2>
-           Currently Booked/Deleverying 
+           Currently Booked/Deleverying
           </h2>
           <p>
             There are many variations of passages of Lorem Ipsum available
@@ -190,28 +190,34 @@ $user = auth()->user();
     </div>
   </section>
  @endif
- 
+
   <!-- end shop section -->
 
   <!-- about section -->
 
-  
+
   <section id="tankers" class="shop_section layout_padding">
     <div class="container">
   <div class="box">
   <div class="detail-box">
+    <h1>Find Similar Tankers</h1>
+    <form action="{{ route('tankers.similar') }}" method="GET">
+        <label for="query">Enter Tanker Name:</label>
+        <input type="text" name="query" id="query" required>
+        <button type="submit">Find Similar Tankers</button>
+    </form>
     <h2>
       Available Tankers
     </h2>
     <p>
-      There are many variations of passages of Lorem Ipsum available
+      There are many Tankers available
     </p>
   </div></div></div></section>
   <!-- end about section -->
   <div class="container-fluid">
     <div class="row">
     @foreach ($products as $item)
-    <div style="margin-bottom: 30px" class="col-md-3"> 
+    <div style="margin-bottom: 30px" class="col-md-3">
         <a style="text-decoration: none;color:grey" href="/tanker/{{$item->id}}">
           <div class="fruit_container">
             <div class="box">
@@ -232,7 +238,7 @@ $user = auth()->user();
                 </a>
             </div>
             @endforeach
-           
+
     </div>
           </div>
           <br/>
@@ -255,8 +261,7 @@ $user = auth()->user();
                       </h2>
                     </div>
                     <p>
-                      There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour
-                    </p>
+                      We offer many tanker as services , You can Order Your Tanker And Track Your Status.
                     <a href="/about_us">
                       Read More
                     </a>
@@ -268,7 +273,7 @@ $user = auth()->user();
           <br/>
           <br/>
           <br/>
-      
+
 
   <!-- client section -->
 
@@ -280,10 +285,10 @@ $user = auth()->user();
         </h2>
         <hr>
       </div>
-    
+
       <div id="carouselExample2Controls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-            
+
           <div class="carousel-item active">
             <div class="client_container layout_padding-top">
               <div class="img-box">
@@ -301,11 +306,11 @@ $user = auth()->user();
                   <img src="images/right-quote.png" alt=""> <br>
                  description
                 </p>
-                
+
               </div>
-            
+
             </div>
-            
+
           </div>
           @foreach ($testimony as $item)
           <div class="carousel-item">
@@ -325,14 +330,14 @@ $user = auth()->user();
                   <img src="images/right-quote.png" alt=""> <br>
                   {{$item->desc}}
                 </p>
-                
+
               </div>
-            
+
             </div>
-            
+
           </div>
           @endforeach
-        </div> 
+        </div>
         <a class="carousel-control-prev" href="#carouselExample2Controls" role="button" data-slide="prev">
           <span class="sr-only">Previous</span>
         </a>
@@ -340,7 +345,7 @@ $user = auth()->user();
           <span class="sr-only">Next</span>
         </a>
       </div>
-     
+
     </div>
   </section>
 
