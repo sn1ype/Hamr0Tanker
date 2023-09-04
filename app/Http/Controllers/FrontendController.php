@@ -68,11 +68,9 @@ class FrontendController extends Controller
 
     public function User()
     {
-        $carousel = Carousel::all();
 
-        return view('user',[
-            'carousel' => $carousel,
-        ]);
+
+        return view('user');
     }
     public function Error()
     {
